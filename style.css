@@ -1,0 +1,14 @@
+*{box-sizing:border-box}body{margin:0;font:17px/1.5 system-ui,sans-serif;color:#111;background:#fff;padding-bottom:72px}
+main{max-width:860px;margin:0 auto;padding:20px 16px 40px}h1{font-size:1.6rem;line-height:1.2;margin:.2em 0 .4em}
+a{color:#1a56db}.mut{color:#555;font-size:.9rem}.card{border:1px solid #ddd;border-radius:10px;padding:14px;margin:12px 0}
+.card h2{margin:0 0 4px;font-size:1.15rem}.note{background:#fff7e0;border:1px solid #f0d27a;border-radius:8px;padding:10px 12px}
+nav.bar{position:fixed;left:0;right:0;bottom:0;display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border-top:2px solid #111;z-index:9}
+nav.bar a{display:flex;align-items:center;justify-content:center;height:58px;font-weight:700;font-size:.85rem;color:#555;text-decoration:none;border-top:3px solid transparent}
+nav.bar a.on{color:#111;border-top-color:#1a56db}
+.brand{font-weight:800}
+/* jobs: one block per job, fields wrap to the width of their content */
+.jobs{list-style:none;padding:0;margin:0}.jobs li{border-bottom:1px solid #ddd;padding:10px 0;display:flex;flex-wrap:wrap;gap:4px 14px}
+.jobs .n{flex:1 1 100%;font-weight:700}.jobs span{font-size:.88rem}.jobs b{color:#555;font-weight:600;font-size:.75rem;text-transform:uppercase;margin-right:4px}
+.off{color:#b42318;font-weight:700}
+@media(min-width:700px){body{padding-bottom:0}nav.bar{position:sticky;top:0;bottom:auto;display:flex;justify-content:center;gap:8px;border-top:0;border-bottom:2px solid #111}
+nav.bar a{height:52px;padding:0 16px;border-top:0;border-bottom:3px solid transparent}nav.bar a.on{border-bottom-color:#1a56db}}
