@@ -2,6 +2,9 @@
 main{max-width:860px;margin:0 auto;padding:20px 16px 40px}h1{font-size:1.6rem;line-height:1.2;margin:.2em 0 .4em}
 a{color:#1a56db}.mut{color:#555;font-size:.9rem}.card{border:1px solid #ddd;border-radius:10px;padding:14px;margin:12px 0}
 .card h2{margin:0 0 4px;font-size:1.15rem}.note{background:#fff7e0;border:1px solid #f0d27a;border-radius:8px;padding:10px 12px}
+/* pricing: one honest statement, same place on every product card (last line of the card) */
+.pricing{margin:12px 0 0;padding:9px 12px;border-left:3px solid #1a56db;background:#f4f7ff;border-radius:8px;color:#333;font-size:.9rem}
+.pricing b{display:block;color:#1a56db;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:2px}
 nav.bar{position:fixed;left:0;right:0;bottom:0;display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border-top:2px solid #111;z-index:9}
 nav.bar a{display:flex;align-items:center;justify-content:center;height:58px;font-weight:700;font-size:.85rem;color:#555;text-decoration:none;border-top:3px solid transparent}
 nav.bar a.on{color:#111;border-top-color:#1a56db}
