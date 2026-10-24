@@ -25,7 +25,8 @@
 <ol>
 <li><strong>On your device:</strong> your connection code (a private channel name plus a secret encryption key) is created in your browser and stored there.</li>
 <li><strong>ntfy.sh (a third-party relay):</strong> each event is encrypted in your browser with AES-GCM before it leaves. ntfy.sh only sees unreadable text and basic connection data such as your IP address, per its own policy. Events are kept there briefly.</li>
-<li><strong>The EchoLike receiver:</strong> a server run by Nova reads your channel, decrypts the events, and stores them (likes, notes, voice notes) linked to your Telegram chat ID so it can work with them for you. Voice notes are transcribed to text; the audio is not kept longer than needed.</li>
+<li><strong>The EchoLike receiver:</strong> a computer run by Nova reads your channel, decrypts the events, and stores them (likes, notes, voice notes) linked to your Telegram chat ID so it can work with them for you. Voice notes are transcribed to text on that same server with an open-source speech model (faster-whisper); the audio is not sent to any outside transcription service and the audio file is deleted right after transcription.</li>
+<li><strong>AI models:</strong> to analyze a saved post for you, the receiver may send the post's text, its link and author, and your note on it (not your audio or Telegram details) to AI models through OpenCode (OpenCode Go hosted models), with Groq as a fallback. Those providers process it under their own policies.</li>
 <li><strong>Telegram:</strong> you pair the extension with our Telegram bot (or on echolike.app). The bot knows your Telegram chat ID and username and sends you replies about your saved items.</li>
 </ol>
 <h2>2. The directory website (echolike.app)</h2>
@@ -37,7 +38,9 @@
 <h2>5. Third parties</h2>
 <ul>
 <li><strong>X (Twitter):</strong> the extension works inside x.com and reads what's on the page; X's own policies apply to your use of X.</li>
-<li><strong>ntfy.sh:</strong> relays encrypted events.</li>
+<li><strong>ntfy.sh:</strong> relays encrypted events (the public ntfy.sh service).</li>
+<li><strong>OpenCode and Groq:</strong> AI models that may analyze a saved post's text and your note.</li>
+<li><strong>Forward Email:</strong> forwards mail sent to hello@echolike.app.</li>
 <li><strong>Telegram:</strong> bot and channel.</li>
 <li><strong>Dodo Payments:</strong> payments, once live.</li>
 </ul>
@@ -51,4 +54,4 @@
 <h2>9. Changes</h2>
 <p>If this policy changes, we'll post the new version here with a new date.</p>
 <h2>10. Contact</h2>
-<p>hello@echolike.app</p></div><p class=mut style='margin-top:40px'><span class=brand>EchoLike</span> · <a href='mailto:hello@echolike.app'>hello@echolike.app</a> · <a href='https://t.me/echolike_radar'>Telegram</a> · <a href='https://x.com/novaisabuilder'>X</a> · <a href='/echolike-site/versions/'>Versions</a> · <a href='/echolike-site/terms/'>Terms</a> · <a href='/echolike-site/privacy/'>Privacy</a> · <a href='/echolike-site/refunds/'>Refunds</a></p></main></body></html>
+<p>hello@echolike.app</p></div><p class=mut style='margin-top:40px'><span class=brand>EchoLike</span> · <a href='mailto:hello@echolike.app'>hello@echolike.app</a> · <a href='https://t.me/echolike_radar'>Telegram</a> · <a href='https://x.com/novaisabuilder'>X</a> · <a href='/echolike-site/progress/#versions'>Versions</a> · <a href='/echolike-site/terms/'>Terms</a> · <a href='/echolike-site/privacy/'>Privacy</a> · <a href='/echolike-site/refunds/'>Refunds</a></p></main></body></html>
