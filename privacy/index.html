@@ -1,0 +1,54 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><title>Privacy Policy · EchoLike</title><link rel=stylesheet href='/echolike-site/style.css'></head><body><nav class=bar aria-label=Main><a href='/echolike-site/products/'>Products</a><a href='/echolike-site/loop/'>Loop</a><a href='/echolike-site/progress/'>Progress</a><a href='/echolike-site/account/'>Account</a></nav><main><div class=policy><h1>Privacy Policy</h1>
+<p><em>Draft policy, effective October 24, 2026. Some details are pending confirmation by the founder.</em></p>
+<p>Last updated: October 24, 2026</p>
+<p>This policy explains what EchoLike collects, where it goes, and how to delete it. EchoLike is run by Nova. Contact: hello@echolike.app.</p>
+<p><strong>Short version:</strong> the extension only acts on X (x.com / twitter.com). It sends encrypted copies of the posts you like or bookmark, and your notes, to your own private connection. We don't sell your data, and we don't use ads or tracking.</p>
+<h2>1. The EchoLike browser extension</h2>
+<h3>What it collects</h3>
+<p>Only when you act on x.com or twitter.com (including mobile.x.com):
+- <strong>Likes, unlikes, bookmarks and unbookmarks</strong> you click. For each one: the post ID, author handle, post link, the visible post text, the post's time, the action, and when you clicked it.
+- <strong>Written notes</strong> you type into the EchoLike note box (up to 4,000 characters).
+- <strong>Voice notes</strong>, only when you press the 🎙 button and allow your microphone. Recording stops after at most 60 seconds.
+- <strong>A status ping</strong> every 30 minutes, and when you press "test", saying the extension is working. It contains no browsing data.</p>
+<p>It does <strong>not</strong> read your X password, direct messages, or pages outside X, and it doesn't track your browsing.</p>
+<h3>Permissions it asks for, and why</h3>
+<ul>
+<li><strong>Access to x.com / twitter.com:</strong> to notice your like and bookmark clicks and add the note and 🎙 buttons.</li>
+<li><strong>Access to ntfy.sh:</strong> to send your encrypted events (see below).</li>
+<li><strong>storage:</strong> to keep your connection code, a queue of unsent events, the last 20 event statuses, and today's like/bookmark count, all on your device.</li>
+<li><strong>alarms:</strong> to retry failed sends every minute and send the 30-minute status ping.</li>
+<li><strong>scripting and tabs:</strong> only to start working on X tabs that were already open when you install or update.</li>
+<li><strong>clipboardWrite:</strong> to copy your connection code when you click it.</li>
+<li>echolike.app is allowed to send the extension your connection code when you pair it on the private page in one click. No other website can.</li>
+</ul>
+<h3>Where it goes</h3>
+<ol>
+<li><strong>On your device:</strong> your connection code (a private channel name plus a secret encryption key) is created in your browser and stored there.</li>
+<li><strong>ntfy.sh (a third-party relay):</strong> each event is encrypted in your browser with AES-GCM before it leaves. ntfy.sh only sees unreadable text and basic connection data such as your IP address, per its own policy. Events are kept there briefly.</li>
+<li><strong>The EchoLike receiver:</strong> a server run by Nova reads your channel, decrypts the events, and stores them (likes, notes, voice notes) linked to your Telegram chat ID so it can work with them for you. Voice notes are transcribed to text; the audio is not kept longer than needed.</li>
+<li><strong>Telegram:</strong> you pair the extension with our Telegram bot (or on echolike.app). The bot knows your Telegram chat ID and username and sends you replies about your saved items.</li>
+</ol>
+<h2>2. The directory website (echolike.app)</h2>
+<p>The directory is free and needs no account. Our hosting provider may keep standard server logs, such as IP address and browser type.</p>
+<h2>3. @echolike_radar Telegram channel</h2>
+<p>Joining the channel is handled by Telegram. We can see channel statistics Telegram provides but not your phone number. Telegram's own privacy policy applies.</p>
+<h2>4. Payments</h2>
+<p>When paid plans launch, Dodo Payments, our merchant of record, collects and processes your payment details, billing address and tax information. We don't see or store your full card number. We receive what Dodo shares to deliver your purchase, such as your email, what you bought and its status. Dodo Payments' privacy policy applies.</p>
+<h2>5. Third parties</h2>
+<ul>
+<li><strong>X (Twitter):</strong> the extension works inside x.com and reads what's on the page; X's own policies apply to your use of X.</li>
+<li><strong>ntfy.sh:</strong> relays encrypted events.</li>
+<li><strong>Telegram:</strong> bot and channel.</li>
+<li><strong>Dodo Payments:</strong> payments, once live.</li>
+</ul>
+<h2>6. What we don't do</h2>
+<p>We don't sell or rent your data, share it with advertisers, or use it for ads.</p>
+<h2>7. Keeping and deleting your data</h2>
+<p>We keep your saved items while you use EchoLike. To delete everything we hold about you, email <strong>hello@echolike.app</strong> from the account you used, or with your Telegram username, and we will delete it within 30 days. Uninstalling the extension deletes the data stored in your browser. Billing records kept by Dodo Payments for legal and tax reasons follow Dodo's rules.</p>
+<p>You can also ask us what we hold about you or to correct it, at the same address.</p>
+<h2>8. Children</h2>
+<p>EchoLike is not meant for anyone under 13.</p>
+<h2>9. Changes</h2>
+<p>If this policy changes, we'll post the new version here with a new date.</p>
+<h2>10. Contact</h2>
+<p>hello@echolike.app</p></div><p class=mut style='margin-top:40px'><span class=brand>EchoLike</span> · <a href='mailto:hello@echolike.app'>hello@echolike.app</a> · <a href='https://t.me/echolike_radar'>Telegram</a> · <a href='https://x.com/novaisabuilder'>X</a> · <a href='/echolike-site/versions/'>Versions</a> · <a href='/echolike-site/terms/'>Terms</a> · <a href='/echolike-site/privacy/'>Privacy</a> · <a href='/echolike-site/refunds/'>Refunds</a></p></main></body></html>
