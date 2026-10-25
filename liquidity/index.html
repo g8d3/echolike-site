@@ -1,0 +1,29 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><title>EchoLike Liquidity · EchoLike</title><link rel=stylesheet href='/echolike-site/style.css'></head><body><nav class=bar aria-label=Main><a href='/echolike-site/products/'>Products</a><a href='/echolike-site/loop/'>Loop</a><a href='/echolike-site/progress/'>Progress</a><a href='/echolike-site/account/'>Account</a></nav><main><p class=brand>EchoLike Liquidity</p><h1>Market-making setup for new token teams</h1>
+<p>We set up and run an automated market maker for your token's trading pair, so there are buy and sell orders on the book from day one.
+It runs on <b>your own exchange account and API keys</b>. Funds never leave your account and we never hold them.</p>
+<div class=card><h2>What you get</h2><ul>
+<li><b>Setup</b>: open-source <a href='https://github.com/hummingbot/hummingbot'>Hummingbot</a> configured for your pair, spreads, order sizes and inventory limits.</li>
+<li><b>Monitoring</b>: we watch uptime, open orders, spreads and inventory.</li>
+<li><b>Alerts</b>: you get a message when the bot stops, inventory runs low or the spread drifts.</li></ul></div>
+<p class=note><b>No profit guarantee.</b> Market making can lose money, including through price moves and inventory risk.
+This is a setup and monitoring service, not investment advice, and results are not promised. Check that market making is allowed for your token where you operate.</p>
+<div class=pricing><b>Pricing</b> Contact us: <a href='mailto:hello@echolike.app?subject=EchoLike%20Liquidity'>hello@echolike.app</a>. No checkout and no payment is taken on this site yet.</div>
+<h2 id=demo>Live demo (paper trading)</h2>
+<p class=mut>A real Hummingbot instance on our own machine, trading with simulated money against live exchange prices. No real funds or keys. Numbers below are read from its status file.</p>
+<div id=liq class=card><p class=mut>Loading the demo status…</p></div>
+<noscript><p class=mut>Turn on JavaScript to see the live demo, or open <a href='status.json'>status.json</a>.</p></noscript>
+<script>
+(function(){var el=document.getElementById('liq');
+function t(s){return new Date(s*1000).toLocaleString('en-US',{timeZone:'America/Bogota',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})+' Bogotá'}
+function h(s){var d=Math.floor(s/86400),hh=Math.floor(s%86400/3600),m=Math.floor(s%3600/60);return (d?d+'d ':'')+hh+'h '+m+'m'}
+fetch('status.json?'+Date.now()).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(d){
+var age=(Date.now()/1000-d.updated_at)/60,o=d.active_orders||[];
+el.innerHTML=(age>90?"<p class=note>This status is "+Math.round(age/60)+" h old, so the demo may be stopped.</p>":"")+
+"<ul class=jobs><li><b>Strategy</b> "+d.strategy+"</li><li><b>Pair</b> "+d.pair+" on "+d.exchange+"</li>"+
+"<li><b>Spread</b> "+d.spread_bps[0]+" / "+d.spread_bps[1]+" bps, order size "+d.order_amount+", refresh "+d.refresh_s+" s</li>"+
+"<li><b>Uptime</b> "+h(d.uptime_s)+"</li><li><b>Orders placed</b> "+d.orders_placed+" · <b>Fills</b> "+d.fills_total+"</li>"+
+"<li><b>Open orders</b> "+(o.map(function(x){return x.side+" "+x.amount+" @ "+x.price.toFixed(2)}).join(", ")||"none")+"</li>"+
+"<li><b>Paper PnL</b> "+(d.paper_pnl_quote==null?"n/a":d.paper_pnl_quote.toFixed(2)+" USDT")+"</li>"+
+"<li><b>Last update</b> "+t(d.updated_at)+"</li></ul>"
+}).catch(function(){el.innerHTML="<p class=mut>Demo status is not available right now.</p>"})})();
+</script><p class=mut style='margin-top:40px'><span class=brand>EchoLike</span> · <a href='mailto:hello@echolike.app'>hello@echolike.app</a> · <a href='https://t.me/echolike_radar'>Telegram</a> · <a href='https://x.com/novaisabuilder'>X</a> · <a href='/echolike-site/progress/#versions'>Versions</a> · <a href='/echolike-site/terms/'>Terms</a> · <a href='/echolike-site/privacy/'>Privacy</a> · <a href='/echolike-site/refunds/'>Refunds</a></p></main></body></html>

@@ -15,3 +15,5 @@ nav.bar a.on{color:#111;border-top-color:#1a56db}
 .off{color:#b42318;font-weight:700}
 @media(min-width:700px){body{padding-bottom:0}nav.bar{position:sticky;top:0;bottom:auto;display:flex;justify-content:center;gap:8px;border-top:0;border-bottom:2px solid #111}
 nav.bar a{height:52px;padding:0 16px;border-top:0;border-bottom:3px solid transparent}nav.bar a.on{border-bottom-color:#1a56db}}
+.on{color:#067647;font-weight:700}
+.offlist{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:6px}.offlist li{font-size:.8rem;background:#f2f2f2;border-radius:4px;padding:2px 6px}
