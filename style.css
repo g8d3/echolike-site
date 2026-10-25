@@ -17,3 +17,6 @@ nav.bar a.on{color:#111;border-top-color:#1a56db}
 nav.bar a{height:52px;padding:0 16px;border-top:0;border-bottom:3px solid transparent}nav.bar a.on{border-bottom-color:#1a56db}}
 .on{color:#067647;font-weight:700}
 .offlist{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:6px}.offlist li{font-size:.8rem;background:#f2f2f2;border-radius:4px;padding:2px 6px}
+
+.btn{display:inline-block;background:#ff7139;color:#fff;font-weight:700;padding:12px 20px;border-radius:10px;text-decoration:none;min-height:44px;box-sizing:border-box}
+.btn:hover{filter:brightness(1.08)}
