@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gupdate xmlns="http://www.google.com/update2/response" protocol="2.0">
   <app appid="idadgdnihpcaeamkkjpglmbcnabkjinc">
-    <updatecheck codebase="https://echolike.app/extension_echolike.crx" version="2.6.3" />
+    <updatecheck codebase="https://echolike.app/extension_echolike.crx" version="2.7.0" />
   </app>
 </gupdate>
