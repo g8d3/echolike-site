@@ -1,0 +1,2136 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://echolike.app/directory/api/schema/harnesses.json",
+ "title": "Agent harnesses & personal agents",
+ "type": "object",
+ "properties": {
+  "fields": {
+   "type": "object",
+   "properties": {
+    "name": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Name",
+         "x-kind": "text",
+         "x-source": "seed",
+         "type": "string",
+         "description": "The project's name."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "url": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Website",
+         "x-kind": "url",
+         "x-source": "seed",
+         "type": "string",
+         "format": "uri",
+         "description": "The project's official website."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "repo": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Repository",
+         "x-kind": "id",
+         "x-source": "seed",
+         "type": "string",
+         "description": "The project's GitHub repository, written as owner/name."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "license": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "License",
+         "x-kind": "id",
+         "x-source": "github",
+         "type": "string",
+         "description": "The open-source license as reported by GitHub, for example MIT or Apache-2.0."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "language": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Main language",
+         "x-kind": "id",
+         "x-source": "github",
+         "type": "string",
+         "description": "The main programming language of the code, as reported by GitHub."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "stars": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "GitHub stars",
+         "x-kind": "count",
+         "x-source": "github",
+         "type": "integer",
+         "minimum": 0,
+         "description": "How many people have starred the repository on GitHub."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "last_commit": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Last code change",
+         "x-kind": "date",
+         "x-source": "github",
+         "type": "string",
+         "format": "date",
+         "description": "Date of the most recent commit to the repository."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "latest_release_version": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Latest release",
+         "x-kind": "id",
+         "x-source": "github",
+         "type": "string",
+         "description": "Version name of the newest release published on GitHub."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "latest_release_date": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Latest release date",
+         "x-kind": "date",
+         "x-source": "github",
+         "type": "string",
+         "format": "date",
+         "description": "Date the newest GitHub release was published."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "docker_required": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Needs Docker",
+         "x-kind": "bool",
+         "x-source": "ai",
+         "type": "boolean",
+         "description": "Yes when the documented install requires Docker."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "deployment": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Where it runs",
+         "x-kind": "enum",
+         "x-source": "ai",
+         "enum": [
+          "self_hosted",
+          "cloud_hosted",
+          "both"
+         ],
+         "description": "Whether you run it on your own machine, the vendor runs it for you, or both are possible."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "pricing_model": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Pricing model",
+         "x-kind": "enum",
+         "x-source": "ai",
+         "enum": [
+          "free_oss",
+          "subscription",
+          "usage_based",
+          "lifetime",
+          "percent_of_volume",
+          "network_cost_plus_flat"
+         ],
+         "description": "How the software itself is paid for, such as free open source or a subscription."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "software_cost": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Software price ($)",
+         "x-kind": "money",
+         "x-source": "ai",
+         "x-unit": "USD",
+         "type": "object",
+         "properties": {
+          "usd": {
+           "type": "number",
+           "minimum": 0
+          },
+          "period": {
+           "enum": [
+            "one_time",
+            "month",
+            "year",
+            "per_call",
+            "per_1M_tokens",
+            "per_GB",
+            "per_hour",
+            "per_seat_month"
+           ]
+          }
+         },
+         "required": [
+          "usd",
+          "period"
+         ],
+         "description": "What the software itself costs and how often you pay it; $0 for free open source."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "software_usd_per_month": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Software price per month ($/month)",
+         "x-kind": "derived",
+         "x-source": "derived",
+         "description": "The software price in US dollars per month, calculated from the Software price column: monthly prices as is, yearly prices divided by 12, $0 stays $0, and other one-time prices are left empty."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "hosted_plan": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Hosted plan offered",
+         "x-kind": "bool",
+         "x-source": "ai",
+         "type": "boolean",
+         "description": "Yes when the vendor offers to run it for you as a hosted service."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "hosted_min_usd_month": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Hosted plan from ($/month)",
+         "x-kind": "usd",
+         "x-source": "ai",
+         "x-unit": "USD",
+         "type": "number",
+         "minimum": 0,
+         "description": "Monthly price of the cheapest hosted plan, in US dollars."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "hosted_max_usd_month": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Hosted plan up to ($/month)",
+         "x-kind": "usd",
+         "x-source": "ai",
+         "x-unit": "USD",
+         "type": "number",
+         "minimum": 0,
+         "description": "Monthly price of the most expensive listed hosted plan, in US dollars."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "free_tier": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Free plan",
+         "x-kind": "bool",
+         "x-source": "ai",
+         "type": "boolean",
+         "description": "Yes when there is a $0 plan or a free usage allowance."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "usage_fees": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "AI usage fees",
+         "x-kind": "enum",
+         "x-source": "ai",
+         "enum": [
+          "none",
+          "pass_through",
+          "markup"
+         ],
+         "description": "How AI model usage is charged: not at all, passed through at cost, or with a markup."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "usage_markup_pct": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "AI usage markup (%)",
+         "x-kind": "percent",
+         "x-source": "ai",
+         "x-unit": "percent",
+         "type": "number",
+         "minimum": 0,
+         "maximum": 100,
+         "description": "The percentage the vendor adds on top of the model provider's price."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "inference_plan_min_usd_month": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Vendor AI plan from ($/month)",
+         "x-kind": "usd",
+         "x-source": "ai",
+         "x-unit": "USD",
+         "type": "number",
+         "minimum": 0,
+         "description": "Monthly price of the cheapest subscription to AI models sold by the vendor itself, such as OpenCode Go."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "inference_plan_max_usd_month": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Vendor AI plan up to ($/month)",
+         "x-kind": "usd",
+         "x-source": "ai",
+         "x-unit": "USD",
+         "type": "number",
+         "minimum": 0,
+         "description": "Monthly price of the most expensive subscription to AI models sold by the vendor itself."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "flat_fee_usd": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Flat fee ($)",
+         "x-kind": "usd",
+         "x-source": "ai",
+         "x-unit": "USD",
+         "type": "number",
+         "minimum": 0,
+         "description": "A fixed fee in US dollars, charged once per the unit shown in the Flat fee charged per column."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "flat_fee_unit": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Flat fee charged per",
+         "x-kind": "enum",
+         "x-source": "ai",
+         "enum": [
+          "per_payment",
+          "per_20_usd_top_up",
+          "per_active_agent_month",
+          "per_call",
+          "per_seat_month"
+         ],
+         "description": "What the flat fee is charged on, such as each $20 credit top-up or each active agent per month."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "model_access": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Which AI models",
+         "x-kind": "enum",
+         "x-source": "ai",
+         "enum": [
+          "first_party_only",
+          "aggregator",
+          "byo_any_openai_compatible",
+          "byo_listed_providers_only"
+         ],
+         "description": "Which AI models you can use, one of: the vendor's own models only; many models through the vendor's account; any OpenAI-compatible service; your keys, only for providers the app already lists."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "native_providers": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Built-in AI providers",
+         "x-kind": "ref_list",
+         "x-source": "ai",
+         "x-ref-type": "model_providers",
+         "type": "array",
+         "items": {
+          "enum": [
+           "openai",
+           "anthropic",
+           "google",
+           "xai",
+           "openrouter",
+           "ollama",
+           "opencode",
+           "groq",
+           "together",
+           "deepseek",
+           "mistral",
+           "local_llama_cpp",
+           "lm_studio",
+           "vllm",
+           "azure_openai",
+           "bedrock",
+           "vertex",
+           "nous_portal",
+           "zhipu",
+           "moonshot",
+           "qwen",
+           "minimax",
+           "github_copilot",
+           "fireworks",
+           "cerebras",
+           "perplexity",
+           "huggingface",
+           "venice"
+          ]
+         },
+         "description": "AI model providers it supports out of the box."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "native_provider_count": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Number of built-in AI providers",
+         "x-kind": "derived",
+         "x-source": "derived",
+         "description": "How many providers are listed, counted from the Built-in AI providers column."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "supports_local_models": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Runs local models",
+         "x-kind": "bool",
+         "x-source": "ai",
+         "type": "boolean",
+         "description": "Yes when it can use AI models running on your own computer, for example through Ollama."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "openai_compatible_endpoint": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Any OpenAI-compatible service",
+         "x-kind": "bool",
+         "x-source": "ai",
+         "type": "boolean",
+         "description": "Yes when you can point it at any service that speaks the OpenAI API by giving a URL and key."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "anthropic_compatible": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Any Anthropic-compatible service",
+         "x-kind": "bool",
+         "x-source": "ai",
+         "type": "boolean",
+         "description": "Yes when you can point it at any service that speaks the Anthropic API by giving a URL and key."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "works_with_agent_clis": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Uses coding-agent tools",
+         "x-kind": "enum_list",
+         "x-source": "ai",
+         "type": "array",
+         "items": {
+          "enum": [
+           "pi",
+           "opencode",
+           "claude_code",
+           "codex",
+           "gemini_cli",
+           "cursor_cli",
+           "copilot_cli",
+           "aider",
+           "goose",
+           "qwen_code",
+           "kimi_cli"
+          ]
+         },
+         "description": "Command-line coding agents, such as Claude Code or Codex, that it can use as its engine."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "bundled_inference": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "AI models included",
+         "x-kind": "bool",
+         "x-source": "ai",
+         "type": "boolean",
+         "description": "Yes when the vendor itself provides access to AI models, free or paid, so you do not need your own key."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "model_count_available": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Models offered by vendor",
+         "x-kind": "count",
+         "x-source": "ai",
+         "type": "integer",
+         "minimum": 0,
+         "description": "How many AI models the vendor's own cloud offers."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "byo_credentials": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Use your own keys",
+         "x-kind": "bool",
+         "x-source": "ai",
+         "type": "boolean",
+         "description": "Yes when you can use your own API keys or AI subscriptions."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "chat_channels": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Chat apps",
+         "x-kind": "enum_list",
+         "x-source": "ai",
+         "type": "array",
+         "items": {
+          "enum": [
+           "telegram",
+           "discord",
+           "slack",
+           "whatsapp",
+           "signal",
+           "imessage",
+           "matrix",
+           "email",
+           "sms",
+           "web",
+           "cli",
+           "lark",
+           "dingtalk",
+           "wechat",
+           "qq",
+           "line",
+           "mattermost",
+           "teams",
+           "voice"
+          ]
+         },
+         "description": "The apps and channels you can talk to it through."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "phone_chat_channels": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Phone chat apps",
+         "x-kind": "derived",
+         "x-source": "derived",
+         "description": "Yes when the Chat apps column includes Telegram, WhatsApp, Signal, iMessage or SMS."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "desktop_app": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Desktop app",
+         "x-kind": "bool",
+         "x-source": "ai",
+         "type": "boolean",
+         "description": "Yes when it has an installable desktop app."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "chat_mode": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Conversation style",
+         "x-kind": "enum",
+         "x-source": "ai",
+         "enum": [
+          "single_ongoing",
+          "auto_sessions_with_memory",
+          "manual_sessions_with_memory",
+          "sessions_only"
+         ],
+         "description": "How conversations work, one of: One ongoing chat; Automatic sessions, shared memory; Sessions you manage, shared memory; Separate sessions, no shared memory."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "auto_context_compaction": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Shortens long chats itself",
+         "x-kind": "bool",
+         "x-source": "ai",
+         "type": "boolean",
+         "description": "Yes when it summarizes or trims a conversation by itself once it gets too long."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "memory_storage": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Memory stored as",
+         "x-kind": "enum_list",
+         "x-source": "ai",
+         "type": "array",
+         "items": {
+          "enum": [
+           "markdown_files",
+           "sqlite_db",
+           "vector_store",
+           "knowledge_graph",
+           "hybrid"
+          ]
+         },
+         "description": "Where its memory is kept, one or more of: Markdown files; SQLite database; Vector store; Knowledge graph. When the source says several are used but does not name them, the value is \"More than one kind\" instead of a guess."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "memory_scope": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Memory shared by",
+         "x-kind": "enum_list",
+         "x-source": "ai",
+         "type": "array",
+         "items": {
+          "enum": [
+           "per_session",
+           "per_bot",
+           "per_user",
+           "shared_across_bots"
+          ]
+         },
+         "description": "Who shares one memory, one of: One session; One bot; One user; All bots."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "memory_writer": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Memory writer",
+         "x-kind": "enum_list",
+         "x-source": "ai",
+         "type": "array",
+         "items": {
+          "enum": [
+           "user_only",
+           "agent_on_request",
+           "agent_autonomous",
+           "background_process"
+          ]
+         },
+         "description": "Who writes to memory: only you, the agent when you ask, the agent on its own, or a background process."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "memory_consolidation": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Memory cleanup",
+         "x-kind": "enum_list",
+         "x-source": "ai",
+         "type": "array",
+         "items": {
+          "enum": [
+           "none",
+           "summarize",
+           "dedupe_merge",
+           "prune_stale"
+          ]
+         },
+         "description": "How old memory is tidied: not at all, by summarizing, by merging duplicates, or by removing stale items."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "consolidation_interval_hours": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Memory cleanup every (hours)",
+         "x-kind": "hours",
+         "x-source": "ai",
+         "x-unit": "hours",
+         "type": "number",
+         "minimum": 0,
+         "description": "How often the memory cleanup runs, in hours."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "memory_retrieval": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Memory recall",
+         "x-kind": "enum_list",
+         "x-source": "ai",
+         "type": "array",
+         "items": {
+          "enum": [
+           "full_injection",
+           "keyword_search",
+           "semantic_search",
+           "tool_call_on_demand"
+          ]
+         },
+         "description": "How memory gets back into a conversation: all of it every time, keyword search, meaning-based search, or a tool the agent calls."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "memory_max_tokens": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Memory size limit (tokens)",
+         "x-kind": "tokens",
+         "x-source": "ai",
+         "x-unit": "tokens",
+         "type": "integer",
+         "minimum": 0,
+         "description": "The maximum size of memory, in tokens."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "survives_compaction": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Memory kept when chat is shortened",
+         "x-kind": "bool",
+         "x-source": "ai",
+         "type": "boolean",
+         "description": "Yes when memory survives after a long chat is summarized or trimmed."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "survives_reset": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Memory kept after a fresh start",
+         "x-kind": "bool",
+         "x-source": "ai",
+         "type": "boolean",
+         "description": "Yes when memory survives after you start a new chat."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "layer_user_profile": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Keeps a profile of you",
+         "x-kind": "bool",
+         "x-source": "ai",
+         "type": "boolean",
+         "description": "Yes when it stores facts about you in a separate profile."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "layer_project_log": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Keeps a project log",
+         "x-kind": "bool",
+         "x-source": "ai",
+         "type": "boolean",
+         "description": "Yes when it keeps a running log for each project."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "layer_skills_store": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Saves skills",
+         "x-kind": "bool",
+         "x-source": "ai",
+         "type": "boolean",
+         "description": "Yes when it stores reusable skills or step-by-step procedures."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "memory_human_readable": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Memory readable by you",
+         "x-kind": "bool",
+         "x-source": "ai",
+         "type": "boolean",
+         "description": "Yes when memory is stored in a form you can read, such as text files."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "memory_user_editable": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Memory editable by you",
+         "x-kind": "bool",
+         "x-source": "ai",
+         "type": "boolean",
+         "description": "Yes when you can edit what it remembers."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "memory_exportable": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Memory exportable",
+         "x-kind": "bool",
+         "x-source": "ai",
+         "type": "boolean",
+         "description": "Yes when you can export its memory to take it elsewhere."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "memory_versioned": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Memory history kept",
+         "x-kind": "bool",
+         "x-source": "ai",
+         "type": "boolean",
+         "description": "Yes when earlier versions of memory are kept, for example in git."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "self_updating_memory": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Writes its own memory",
+         "x-kind": "derived",
+         "x-source": "derived",
+         "description": "Yes when the agent or a background process writes memory, calculated from the Memory writer column."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "user_profile_learning": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Learns about you",
+         "x-kind": "bool",
+         "x-source": "ai",
+         "type": "boolean",
+         "description": "Yes when it learns your preferences on its own over time."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "self_written_skills": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Writes its own skills",
+         "x-kind": "bool",
+         "x-source": "ai",
+         "type": "boolean",
+         "description": "Yes when it creates new reusable skills by itself."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "cron": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Scheduled tasks",
+         "x-kind": "bool",
+         "x-source": "ai",
+         "type": "boolean",
+         "description": "Yes when you can schedule tasks to run at set times."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "self_scheduled_tasks": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Schedules its own tasks",
+         "x-kind": "bool",
+         "x-source": "ai",
+         "type": "boolean",
+         "description": "Yes when the agent can create scheduled tasks for itself."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "subagents": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Helper agents",
+         "x-kind": "bool",
+         "x-source": "ai",
+         "type": "boolean",
+         "description": "Yes when it can start helper agents that work in parallel or in the background."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "agent_teams": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Agent teams",
+         "x-kind": "bool",
+         "x-source": "ai",
+         "type": "boolean",
+         "description": "Yes when several named agents with different roles can work together."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "proactive_messages": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Messages you first",
+         "x-kind": "bool",
+         "x-source": "ai",
+         "type": "boolean",
+         "description": "Yes when it can send you a message without being asked."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "mcp": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "MCP tools",
+         "x-kind": "bool",
+         "x-source": "ai",
+         "type": "boolean",
+         "description": "Yes when it can use tools through the Model Context Protocol (MCP)."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "ram_mb": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Memory use when idle (MB)",
+         "x-kind": "ram_mb",
+         "x-source": "ai",
+         "x-unit": "MB",
+         "type": "number",
+         "minimum": 0,
+         "description": "How much RAM it uses while idle, in megabytes."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "binary_size_mb": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Install size (MB)",
+         "x-kind": "size_mb",
+         "x-source": "ai",
+         "x-unit": "MB",
+         "type": "number",
+         "minimum": 0,
+         "description": "Disk space of the installed program, in megabytes."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "summary": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Summary",
+         "x-kind": "text",
+         "x-source": "ai",
+         "type": "string",
+         "description": "A short description written from the project's own pages."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "tags": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Tags",
+         "x-kind": "enum_list",
+         "x-source": "ai",
+         "type": "array",
+         "items": {
+          "type": "string"
+         },
+         "description": "Short topic keywords for search."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "notes": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Notes",
+         "x-kind": "text",
+         "x-source": "manual",
+         "type": "string",
+         "description": "Our editorial notes about this entry."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    }
+   }
+  }
+ }
+}

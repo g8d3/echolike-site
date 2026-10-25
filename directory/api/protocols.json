@@ -1,0 +1,81 @@
+{
+ "type": "protocols",
+ "title": "Crypto protocols: fundamentals",
+ "status": "planned",
+ "updated": null,
+ "columns": [
+  {
+   "key": "name",
+   "label": "Name",
+   "kind": "text",
+   "source": "seed",
+   "desc": "The project's name.",
+   "type": "text"
+  },
+  {
+   "key": "url",
+   "label": "Website",
+   "kind": "url",
+   "source": "seed",
+   "desc": "The project's official website.",
+   "type": "url"
+  },
+  {
+   "key": "category",
+   "label": "Category",
+   "kind": "id",
+   "source": "defillama",
+   "desc": "The main category it belongs to.",
+   "type": "id"
+  },
+  {
+   "key": "holders_revenue_30d_usd",
+   "label": "Holder revenue, 30 days ($)",
+   "kind": "usd",
+   "source": "defillama",
+   "desc": "Revenue paid to token holders over the last 30 days, in US dollars.",
+   "type": "usd"
+  },
+  {
+   "key": "revenue_30d_usd",
+   "label": "Revenue, 30 days ($)",
+   "kind": "usd",
+   "source": "defillama",
+   "desc": "Protocol revenue over the last 30 days, in US dollars.",
+   "type": "usd"
+  },
+  {
+   "key": "ps_ratio",
+   "label": "Price-to-sales ratio",
+   "kind": "number",
+   "source": "defillama",
+   "desc": "Market cap divided by yearly revenue.",
+   "type": "number"
+  },
+  {
+   "key": "margin_pct",
+   "label": "Margin (%)",
+   "kind": "percent",
+   "source": "defillama",
+   "desc": "Holder revenue as a percentage of total fees.",
+   "type": "percent"
+  },
+  {
+   "key": "growth_30d_pct",
+   "label": "Revenue growth, 30 days (%)",
+   "kind": "number",
+   "source": "defillama",
+   "desc": "Change in revenue versus the previous 30 days, in percent.",
+   "type": "number"
+  },
+  {
+   "key": "notes",
+   "label": "Notes",
+   "kind": "text",
+   "source": "manual",
+   "desc": "Our editorial notes about this entry.",
+   "type": "text"
+  }
+ ],
+ "entities": []
+}

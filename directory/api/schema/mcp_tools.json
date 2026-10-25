@@ -1,0 +1,459 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://echolike.app/directory/api/schema/mcp_tools.json",
+ "title": "MCP servers & agent tools",
+ "type": "object",
+ "properties": {
+  "fields": {
+   "type": "object",
+   "properties": {
+    "name": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Name",
+         "x-kind": "text",
+         "x-source": "seed",
+         "type": "string",
+         "description": "The project's name."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "url": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Website",
+         "x-kind": "url",
+         "x-source": "seed",
+         "type": "string",
+         "format": "uri",
+         "description": "The project's official website."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "repo": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Repository",
+         "x-kind": "id",
+         "x-source": "seed",
+         "type": "string",
+         "description": "The project's GitHub repository, written as owner/name."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "stars": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "GitHub stars",
+         "x-kind": "count",
+         "x-source": "github",
+         "type": "integer",
+         "minimum": 0,
+         "description": "How many people have starred the repository on GitHub."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "license": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "License",
+         "x-kind": "id",
+         "x-source": "github",
+         "type": "string",
+         "description": "The open-source license as reported by GitHub, for example MIT or Apache-2.0."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "last_commit": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Last code change",
+         "x-kind": "date",
+         "x-source": "github",
+         "type": "string",
+         "format": "date",
+         "description": "Date of the most recent commit to the repository."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "category": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Category",
+         "x-kind": "enum",
+         "x-source": "ai",
+         "enum": [
+          "data",
+          "dev",
+          "browser",
+          "finance",
+          "crypto",
+          "search",
+          "productivity",
+          "media",
+          "other"
+         ],
+         "description": "The main category it belongs to."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "transport": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Connection type",
+         "x-kind": "enum_list",
+         "x-source": "ai",
+         "type": "array",
+         "items": {
+          "enum": [
+           "stdio",
+           "sse",
+           "streamable_http"
+          ]
+         },
+         "description": "How an agent connects to it, such as local process or HTTP."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "auth": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Sign-in method",
+         "x-kind": "enum",
+         "x-source": "ai",
+         "enum": [
+          "none",
+          "api_key",
+          "oauth"
+         ],
+         "description": "How it authenticates, such as an API key or OAuth."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "pricing_model": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Pricing model",
+         "x-kind": "enum",
+         "x-source": "ai",
+         "enum": [
+          "free_oss",
+          "subscription",
+          "usage_based",
+          "lifetime",
+          "percent_of_volume",
+          "network_cost_plus_flat"
+         ],
+         "description": "How the software itself is paid for, such as free open source or a subscription."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "software_cost": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Software price ($)",
+         "x-kind": "money",
+         "x-source": "ai",
+         "x-unit": "USD",
+         "type": "object",
+         "properties": {
+          "usd": {
+           "type": "number",
+           "minimum": 0
+          },
+          "period": {
+           "enum": [
+            "one_time",
+            "month",
+            "year",
+            "per_call",
+            "per_1M_tokens",
+            "per_GB",
+            "per_hour",
+            "per_seat_month"
+           ]
+          }
+         },
+         "required": [
+          "usd",
+          "period"
+         ],
+         "description": "What the software itself costs and how often you pay it; $0 for free open source."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "free_tier": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Free plan",
+         "x-kind": "bool",
+         "x-source": "ai",
+         "type": "boolean",
+         "description": "Yes when there is a $0 plan or a free usage allowance."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "summary": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Summary",
+         "x-kind": "text",
+         "x-source": "ai",
+         "type": "string",
+         "description": "A short description written from the project's own pages."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "notes": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Notes",
+         "x-kind": "text",
+         "x-source": "manual",
+         "type": "string",
+         "description": "Our editorial notes about this entry."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    }
+   }
+  }
+ }
+}

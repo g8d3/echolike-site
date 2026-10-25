@@ -1,0 +1,273 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://echolike.app/directory/api/schema/protocols.json",
+ "title": "Crypto protocols: fundamentals",
+ "type": "object",
+ "properties": {
+  "fields": {
+   "type": "object",
+   "properties": {
+    "name": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Name",
+         "x-kind": "text",
+         "x-source": "seed",
+         "type": "string",
+         "description": "The project's name."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "url": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Website",
+         "x-kind": "url",
+         "x-source": "seed",
+         "type": "string",
+         "format": "uri",
+         "description": "The project's official website."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "category": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Category",
+         "x-kind": "id",
+         "x-source": "defillama",
+         "type": "string",
+         "description": "The main category it belongs to."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "holders_revenue_30d_usd": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Holder revenue, 30 days ($)",
+         "x-kind": "usd",
+         "x-source": "defillama",
+         "x-unit": "USD",
+         "type": "number",
+         "minimum": 0,
+         "description": "Revenue paid to token holders over the last 30 days, in US dollars."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "revenue_30d_usd": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Revenue, 30 days ($)",
+         "x-kind": "usd",
+         "x-source": "defillama",
+         "x-unit": "USD",
+         "type": "number",
+         "minimum": 0,
+         "description": "Protocol revenue over the last 30 days, in US dollars."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "ps_ratio": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Price-to-sales ratio",
+         "x-kind": "number",
+         "x-source": "defillama",
+         "type": "number",
+         "description": "Market cap divided by yearly revenue."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "margin_pct": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Margin (%)",
+         "x-kind": "percent",
+         "x-source": "defillama",
+         "x-unit": "percent",
+         "type": "number",
+         "minimum": 0,
+         "maximum": 100,
+         "description": "Holder revenue as a percentage of total fees."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "growth_30d_pct": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Revenue growth, 30 days (%)",
+         "x-kind": "number",
+         "x-source": "defillama",
+         "type": "number",
+         "description": "Change in revenue versus the previous 30 days, in percent."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "notes": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Notes",
+         "x-kind": "text",
+         "x-source": "manual",
+         "type": "string",
+         "description": "Our editorial notes about this entry."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    }
+   }
+  }
+ }
+}

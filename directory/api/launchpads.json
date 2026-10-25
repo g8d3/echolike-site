@@ -1,0 +1,90 @@
+{
+ "type": "launchpads",
+ "title": "Token launchpads",
+ "status": "planned",
+ "updated": null,
+ "columns": [
+  {
+   "key": "name",
+   "label": "Name",
+   "kind": "text",
+   "source": "seed",
+   "desc": "The project's name.",
+   "type": "text"
+  },
+  {
+   "key": "url",
+   "label": "Website",
+   "kind": "url",
+   "source": "seed",
+   "desc": "The project's official website.",
+   "type": "url"
+  },
+  {
+   "key": "chains",
+   "label": "Blockchains",
+   "kind": "enum_list",
+   "vocab": "chains",
+   "source": "ai",
+   "desc": "The blockchains it supports.",
+   "type": "list"
+  },
+  {
+   "key": "launch_fee",
+   "label": "Launch fee",
+   "kind": "money",
+   "source": "ai",
+   "desc": "What it costs to launch a token, in US dollars.",
+   "type": "money"
+  },
+  {
+   "key": "trade_fee_bps",
+   "label": "Trade fee (bps)",
+   "kind": "bps",
+   "source": "ai",
+   "desc": "Fee charged on each trade, in basis points; 1 bps is 0.01%.",
+   "type": "bps"
+  },
+  {
+   "key": "creator_fee_bps",
+   "label": "Creator fee (bps)",
+   "kind": "bps",
+   "source": "ai",
+   "desc": "Share of each trade paid to the token creator, in basis points.",
+   "type": "bps"
+  },
+  {
+   "key": "graduation_mcap_usd",
+   "label": "Graduation market cap ($)",
+   "kind": "usd",
+   "source": "ai",
+   "desc": "Market cap at which a token moves from the launchpad to an open market, in US dollars.",
+   "type": "usd"
+  },
+  {
+   "key": "kyc",
+   "label": "Identity check required (KYC)",
+   "kind": "bool",
+   "source": "ai",
+   "desc": "Yes when you must verify your identity before you can use it.",
+   "type": "bool"
+  },
+  {
+   "key": "api",
+   "label": "Public API",
+   "kind": "bool",
+   "source": "ai",
+   "desc": "Yes when it offers a documented public API.",
+   "type": "bool"
+  },
+  {
+   "key": "notes",
+   "label": "Notes",
+   "kind": "text",
+   "source": "manual",
+   "desc": "Our editorial notes about this entry.",
+   "type": "text"
+  }
+ ],
+ "entities": []
+}

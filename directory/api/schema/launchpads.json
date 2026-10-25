@@ -1,0 +1,347 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://echolike.app/directory/api/schema/launchpads.json",
+ "title": "Token launchpads",
+ "type": "object",
+ "properties": {
+  "fields": {
+   "type": "object",
+   "properties": {
+    "name": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Name",
+         "x-kind": "text",
+         "x-source": "seed",
+         "type": "string",
+         "description": "The project's name."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "url": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Website",
+         "x-kind": "url",
+         "x-source": "seed",
+         "type": "string",
+         "format": "uri",
+         "description": "The project's official website."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "chains": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Blockchains",
+         "x-kind": "enum_list",
+         "x-source": "ai",
+         "type": "array",
+         "items": {
+          "enum": [
+           "ethereum",
+           "solana",
+           "base",
+           "arbitrum",
+           "optimism",
+           "bsc",
+           "polygon",
+           "hyperliquid",
+           "sui",
+           "aptos",
+           "ton",
+           "tron",
+           "bitcoin",
+           "avalanche",
+           "starknet",
+           "zksync",
+           "linea",
+           "blast",
+           "monad",
+           "berachain"
+          ]
+         },
+         "description": "The blockchains it supports."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "launch_fee": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Launch fee",
+         "x-kind": "money",
+         "x-source": "ai",
+         "x-unit": "USD",
+         "type": "object",
+         "properties": {
+          "usd": {
+           "type": "number",
+           "minimum": 0
+          },
+          "period": {
+           "enum": [
+            "one_time",
+            "month",
+            "year",
+            "per_call",
+            "per_1M_tokens",
+            "per_GB",
+            "per_hour",
+            "per_seat_month"
+           ]
+          }
+         },
+         "required": [
+          "usd",
+          "period"
+         ],
+         "description": "What it costs to launch a token, in US dollars."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "trade_fee_bps": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Trade fee (bps)",
+         "x-kind": "bps",
+         "x-source": "ai",
+         "x-unit": "basis_points",
+         "type": "number",
+         "minimum": 0,
+         "description": "Fee charged on each trade, in basis points; 1 bps is 0.01%."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "creator_fee_bps": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Creator fee (bps)",
+         "x-kind": "bps",
+         "x-source": "ai",
+         "x-unit": "basis_points",
+         "type": "number",
+         "minimum": 0,
+         "description": "Share of each trade paid to the token creator, in basis points."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "graduation_mcap_usd": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Graduation market cap ($)",
+         "x-kind": "usd",
+         "x-source": "ai",
+         "x-unit": "USD",
+         "type": "number",
+         "minimum": 0,
+         "description": "Market cap at which a token moves from the launchpad to an open market, in US dollars."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "kyc": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Identity check required (KYC)",
+         "x-kind": "bool",
+         "x-source": "ai",
+         "type": "boolean",
+         "description": "Yes when you must verify your identity before you can use it."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "api": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Public API",
+         "x-kind": "bool",
+         "x-source": "ai",
+         "type": "boolean",
+         "description": "Yes when it offers a documented public API."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "notes": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Notes",
+         "x-kind": "text",
+         "x-source": "manual",
+         "type": "string",
+         "description": "Our editorial notes about this entry."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    }
+   }
+  }
+ }
+}

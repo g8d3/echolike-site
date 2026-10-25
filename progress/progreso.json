@@ -1,0 +1,436 @@
+{
+ "generated_at": "2026-10-23T22:58:48-05:00",
+ "week": "2026-W43",
+ "week_start": "2026-10-19",
+ "week_end": "2026-10-25",
+ "outcomes": {
+  "items": [
+   {
+    "path": "/",
+    "title": "Home page",
+    "description": "The front door: what EchoLike is, with links to the tools and the writing.",
+    "title_es": "Inicio",
+    "description_es": "La puerta de entrada: qué es EchoLike, con enlaces a las herramientas y a lo que escribimos.",
+    "url": "https://echolike.app/",
+    "http": 200,
+    "live": true,
+    "first_live": "2026-10-21T09:43:31-05:00",
+    "first_live_method": "first full-site upload (per-page date not recorded)",
+    "first_live_evidence": "funding_publicar.log, Oct 21, 2026 09:43 Bogotá, 39 files",
+    "checked_at": "2026-10-23T22:58:48-05:00"
+   },
+   {
+    "path": "/directory/",
+    "title": "Directory",
+    "description": "Tables of agent harnesses, exchanges, model providers and more, with a source for every value.",
+    "title_es": "Directorio",
+    "description_es": "Tablas de harnesses de agentes, exchanges, proveedores de modelos y más, con fuente para cada valor.",
+    "url": "https://echolike.app/directory/",
+    "http": 200,
+    "live": true,
+    "first_live": "2026-10-22T14:52:55-05:00",
+    "first_live_method": "first full-site upload after this page was built",
+    "first_live_evidence": "funding_publicar.log, Oct 22, 2026 14:52 Bogotá, 140 files",
+    "checked_at": "2026-10-23T22:58:48-05:00"
+   },
+   {
+    "path": "/progress/live/",
+    "title": "Live work",
+    "description": "What the agents are doing right now, job by job, with the last line each one wrote.",
+    "title_es": "Trabajo en vivo",
+    "description_es": "Qué están haciendo los agentes ahora mismo, tarea por tarea, con la última línea que escribió cada una.",
+    "url": "https://echolike.app/progress/live/",
+    "http": 200,
+    "live": true,
+    "first_live": "2026-10-21T09:43:31-05:00",
+    "first_live_method": "first full-site upload (per-page date not recorded)",
+    "first_live_evidence": "funding_publicar.log, Oct 21, 2026 09:43 Bogotá, 39 files",
+    "checked_at": "2026-10-23T22:58:48-05:00"
+   },
+   {
+    "path": "/funding-rates/",
+    "title": "Funding rates",
+    "description": "Live perpetual funding across exchanges, rebuilt every hour.",
+    "title_es": "Tasas de funding",
+    "description_es": "Tasas de funding de perpetuos en los exchanges, reconstruidas cada hora.",
+    "url": "https://echolike.app/funding-rates/",
+    "http": 200,
+    "live": true,
+    "first_live": "2026-10-21T09:43:31-05:00",
+    "first_live_method": "first upload in the hourly publish log",
+    "first_live_evidence": "funding_publicar.log, Oct 21, 2026 09:43 Bogotá, 39 files",
+    "checked_at": "2026-10-23T22:58:48-05:00"
+   },
+   {
+    "path": "/extension/",
+    "title": "Browser extension",
+    "description": "Install page and download for the X likes extension.",
+    "title_es": "Extensión de navegador",
+    "description_es": "Página de instalación y descarga de la extensión para los likes de X.",
+    "url": "https://echolike.app/extension/",
+    "http": 200,
+    "live": true,
+    "first_live": "2026-10-21T09:43:31-05:00",
+    "first_live_method": "first full-site upload (per-page date not recorded)",
+    "first_live_evidence": "funding_publicar.log, Oct 21, 2026 09:43 Bogotá, 39 files",
+    "checked_at": "2026-10-23T22:58:48-05:00"
+   },
+   {
+    "path": "/links/",
+    "title": "Links",
+    "description": "One row per place EchoLike lives, marked as a page here or another service.",
+    "title_es": "Enlaces",
+    "description_es": "Una fila por cada lugar donde vive EchoLike, marcando cuáles son páginas de aquí y cuáles otro servicio.",
+    "url": "https://echolike.app/links/",
+    "http": 200,
+    "live": true,
+    "first_live": "2026-10-21T09:43:31-05:00",
+    "first_live_method": "first full-site upload (per-page date not recorded)",
+    "first_live_evidence": "funding_publicar.log, Oct 21, 2026 09:43 Bogotá, 39 files",
+    "checked_at": "2026-10-23T22:58:48-05:00"
+   },
+   {
+    "path": "/products/",
+    "title": "Products",
+    "description": "Every product EchoLike ships, one card each, with the page of each one.",
+    "title_es": "Productos",
+    "description_es": "Cada producto que hace EchoLike, una tarjeta cada uno, con la página de cada uno.",
+    "url": "https://echolike.app/products/",
+    "http": 404,
+    "live": false,
+    "first_live": "2026-10-21T09:43:31-05:00",
+    "first_live_method": "first full-site upload (per-page date not recorded)",
+    "first_live_evidence": "funding_publicar.log, Oct 21, 2026 09:43 Bogotá, 39 files",
+    "checked_at": "2026-10-23T22:58:48-05:00"
+   },
+   {
+    "path": "/archive/",
+    "title": "Archive",
+    "description": "Public posts kept in one page.",
+    "title_es": "Archivo",
+    "description_es": "Publicaciones públicas guardadas en una página.",
+    "url": "https://echolike.app/archive/",
+    "http": 200,
+    "live": true,
+    "first_live": "2026-10-21T09:43:31-05:00",
+    "first_live_method": "first full-site upload (per-page date not recorded)",
+    "first_live_evidence": "funding_publicar.log, Oct 21, 2026 09:43 Bogotá, 39 files",
+    "checked_at": "2026-10-23T22:58:48-05:00"
+   },
+   {
+    "path": "/privacy/",
+    "title": "Privacy policy",
+    "description": "What the site and the bot store.",
+    "title_es": "Privacidad",
+    "description_es": "Qué guardan el sitio y el bot.",
+    "url": "https://echolike.app/privacy/",
+    "http": 200,
+    "live": true,
+    "first_live": "2026-10-21T09:43:31-05:00",
+    "first_live_method": "first full-site upload (per-page date not recorded)",
+    "first_live_evidence": "funding_publicar.log, Oct 21, 2026 09:43 Bogotá, 39 files",
+    "checked_at": "2026-10-23T22:58:48-05:00"
+   },
+   {
+    "path": "/progress/",
+    "title": "Progress page",
+    "description": "This page: outcomes, usage, corrections, goals and money.",
+    "title_es": "Página de avance",
+    "description_es": "Esta página: resultados, uso, correcciones, metas y dinero.",
+    "url": "https://echolike.app/progress/",
+    "http": 200,
+    "live": true,
+    "first_live": "2026-10-23T11:09:05-05:00",
+    "first_live_method": "first build of this page (published in the same run)",
+    "first_live_evidence": "build time Oct 23, 2026 11:09 Bogotá; the publisher refuses to finish without a verified upload",
+    "checked_at": "2026-10-23T22:58:48-05:00"
+   }
+  ],
+  "live": 9,
+  "total": 10,
+  "checked_at": "2026-10-23T22:58:48-05:00"
+ },
+ "usage": {
+  "visits": {
+   "value": null,
+   "missing_en": "No visit count is stored. The site carries a visit-counter tag, but the API token file named in the operator config is absent, so the counter cannot be read.",
+   "missing_es": "No se guarda ningún conteo de visitas. El sitio lleva una etiqueta de contador, pero falta el archivo del token de la API que nombra la configuración del operador, así que no se puede leer.",
+   "source": 10
+  },
+  "api_calls": {
+   "value": null,
+   "missing_en": "No request log exists for the directory API. The site is static, served by a publishing service that keeps no per-file request log, so calls are not recorded anywhere.",
+   "missing_es": "No existe un registro de peticiones de la API del directorio. El sitio es estático y lo sirve un servicio de publicación que no guarda peticiones, así que las llamadas no quedan registradas.",
+   "source": 3
+  },
+  "likes": {
+   "received": 532,
+   "ideas": 387,
+   "ideas_with_step_done": 18,
+   "steps_done": 19,
+   "alerts": 18,
+   "alerts_with_next_step": 18,
+   "as_of": "2026-10-23T22:22:36-05:00",
+   "sources": {
+    "received": 4,
+    "ideas": 5,
+    "alerts": 6
+   }
+  }
+ },
+ "corrections": {
+  "weeks": [
+   {
+    "week": "2026-W43",
+    "start": "2026-10-19",
+    "end": "2026-10-25",
+    "founder": 14,
+    "ai": 712,
+    "qa": 0,
+    "founder_share_pct": 1.9
+   }
+  ],
+  "trend": {
+   "direction": "unknown",
+   "text": "No trend yet: one week of records so far. If the founder share falls next week, mistakes are being caught before they reach the founder."
+  },
+  "review_report": "reportes/revision_directorio_2026-10-23.md",
+  "as_of": "2026-10-23T22:58:48-05:00"
+ },
+ "goals": {
+  "week": "2026-W43",
+  "week_start": "2026-10-19",
+  "week_end": "2026-10-25",
+  "items": [
+   {
+    "id": "directory-gate",
+    "title": "Publish the directory quality gate and the public rules page",
+    "why": "Readers can only trust the tables if the rules are public and a failing build cannot go live.",
+    "check": {
+     "type": "http",
+     "urls": [
+      "https://echolike.app/directory/",
+      "https://echolike.app/directory/rules/"
+     ]
+    },
+    "status": "done",
+    "reason": "Every required page answered with a normal response: https://echolike.app/directory/ (200), https://echolike.app/directory/rules/ (200).",
+    "evidence": [
+     "https://echolike.app/directory/ answered 200",
+     "https://echolike.app/directory/rules/ answered 200"
+    ],
+    "checked_at": "2026-10-23T22:58:48-05:00"
+   },
+   {
+    "id": "cyber-ps",
+    "title": "Cybersecurity stocks with a price to sales value",
+    "why": "The first stock table only counts once a real valuation ratio (price to sales) is sourced, not just revenue.",
+    "check": {
+     "type": "fields",
+     "file": "directorio/datos/cybersecurity_stocks.json",
+     "field": "price_to_sales",
+     "unit": "ratio",
+     "published": true
+    },
+    "status": "not_done",
+    "reason": "Not done: 0 of 5 entries have a sourced price to sales value and the published table answered 200. The proof paths are listed below.",
+    "evidence": [
+     "0 of 5 entries have a value for price_to_sales in directorio/datos/cybersecurity_stocks.json",
+     "https://echolike.app/directory/cybersecurity_stocks/ answered 200"
+    ],
+    "checked_at": "2026-10-23T22:58:48-05:00"
+   },
+   {
+    "id": "usage-per-key",
+    "title": "A usage page for each OpenCode key",
+    "why": "We pay for model access per key; without per-key usage we cannot tell which work burns the budget.",
+    "check": {
+     "type": "any_file",
+     "paths": [
+      "unico/usage/index.html",
+      "estado/uso_por_clave.json",
+      "unico/usage-per-key/index.html"
+     ]
+    },
+    "status": "not_done",
+    "reason": "Not done: no proof file or record exists yet. Proof paths are listed below.",
+    "evidence": [
+     "missing: unico/usage/index.html",
+     "missing: estado/uso_por_clave.json",
+     "missing: unico/usage-per-key/index.html"
+    ],
+    "checked_at": "2026-10-23T22:58:48-05:00"
+   },
+   {
+    "id": "likes-minipc",
+    "title": "Run the X likes check on the mini PC",
+    "why": "The likes reader must run without the old hosted bot; it is the input for ideas and alerts.",
+    "check": {
+     "type": "timer",
+     "unit": "echolike-likes.timer",
+     "file": "estado/likes_ultimo.json",
+     "max_age_hours": 3
+    },
+    "status": "not_done",
+    "reason": "Not done: timer is active and the last run was 8.0 hours ago (limit 3).",
+    "evidence": [
+     "echolike-likes.timer is active",
+     "last run recorded in estado/likes_ultimo.json was 8.0 hours ago"
+    ],
+    "checked_at": "2026-10-23T22:58:48-05:00"
+   },
+   {
+    "id": "full-threads",
+    "title": "Publish full X threads",
+    "why": "Single posts get little reach; full threads are the format that carries an argument.",
+    "check": {
+     "type": "glob",
+     "paths": [
+      "estado/hilos_publicados.json",
+      "posts_publicados/*thread*",
+      "posts_publicados/*hilo*"
+     ]
+    },
+    "status": "not_done",
+    "reason": "Not done: no proof file or record exists yet. Proof paths are listed below.",
+    "evidence": [
+     "missing: estado/hilos_publicados.json",
+     "missing: posts_publicados/*thread*",
+     "missing: posts_publicados/*hilo*"
+    ],
+    "checked_at": "2026-10-23T22:58:48-05:00"
+   }
+  ],
+  "done": 1,
+  "total": 5,
+  "file": "estado/metas_semana.json",
+  "as_of": "2026-10-23T22:58:48-05:00",
+  "current_week": "2026-W43",
+  "stale": false
+ },
+ "money": {
+  "revenue": {
+   "value": null,
+   "missing_en": "No file records a customer payment, sale or subscription. The only money record in the state folder is our own trading wallet.",
+   "missing_es": "Ningún archivo registra un pago, venta o suscripción de un cliente. El único registro de dinero es nuestra propia billetera de trading.",
+   "source": 11
+  },
+  "costs": {
+   "value": null,
+   "missing_en": "No expense ledger exists. The wallet transfer log records moves, not costs, so spending is not tracked yet.",
+   "missing_es": "No existe un libro de gastos. El registro de transferencias anota movimientos, no costos, así que el gasto todavía no se registra.",
+   "source": 11
+  },
+  "trading_float": {
+   "in_usd": 100.0,
+   "in_date": "2026-10-10T02:13:00+00:00",
+   "value_usd": 70.24,
+   "pnl_usd": -29.76,
+   "as_of": "2026-10-24T03:57:54.839853+00:00",
+   "source": 11
+  }
+ },
+ "verdict": {
+  "live": 9,
+  "pages": 10,
+  "goals_done": 1,
+  "goals_total": 5,
+  "corrections_founder": 14,
+  "corrections_ai": 712,
+  "founder_share_pct": 1.9,
+  "revenue_tracked": false
+ },
+ "sources": [
+  {
+   "id": 1,
+   "title": "Live page checks",
+   "ref": "https://echolike.app",
+   "as_of": "2026-10-23T22:58:48-05:00",
+   "note": "Every page in section 1 was requested once while this page was built. The response is recorded per page."
+  },
+  {
+   "id": 2,
+   "title": "Publish log",
+   "ref": "funding_publicar.log",
+   "as_of": "2026-10-23T22:09:19-05:00",
+   "note": "Local log of the hourly publisher. Each line records the moment a full-site upload succeeded, with the number of files sent."
+  },
+  {
+   "id": 3,
+   "title": "Published folder",
+   "ref": "unico/",
+   "as_of": "2026-10-23T22:41:27-05:00",
+   "note": "Local copy of the published site. The folder is not in git, so first-live dates come from the publish log and build times, never from git history."
+  },
+  {
+   "id": 4,
+   "title": "Likes captured",
+   "ref": "estado/likes_recibidos.json",
+   "as_of": "2026-10-23T22:26:42-05:00",
+   "note": "Post IDs the browser extension sent from the founder's X likes."
+  },
+  {
+   "id": 5,
+   "title": "Ideas from likes",
+   "ref": "estado/ideas.json",
+   "as_of": "2026-10-23T22:22:36-05:00",
+   "note": "Each idea carries the steps needed to act on it and the date a step was finished."
+  },
+  {
+   "id": 6,
+   "title": "Open alerts",
+   "ref": "estado/likes_alertas.json",
+   "as_of": "2026-10-23T15:00:43-05:00",
+   "note": "Likes that produced a written next step. The file keeps the most recent alerts only."
+  },
+  {
+   "id": 7,
+   "title": "Founder corrections",
+   "ref": "directorio/reglas.yaml",
+   "as_of": "2026-10-22T16:38:09-05:00",
+   "note": "The rules file is the single log of corrections: every new correction is appended with the date it was added."
+  },
+  {
+   "id": 8,
+   "title": "Independent AI review",
+   "ref": "reportes/revision_directorio_2026-10-23.md",
+   "as_of": "2026-10-23T21:56:07-05:00",
+   "note": "Review rounds read the same pages with models different from the builder. Repeated findings across rounds are counted once."
+  },
+  {
+   "id": 9,
+   "title": "Automatic reader QA",
+   "ref": "reportes/qa_directorio.json",
+   "as_of": "2026-10-23T22:46:44-05:00",
+   "note": "Machine checks on the directory build: sources, units, labels, phone and desktop rendering."
+  },
+  {
+   "id": 10,
+   "title": "Visit count setup",
+   "ref": "operador/config.json",
+   "as_of": "2026-10-21T23:37:19-05:00",
+   "note": "Where a visit counter would be read from. The site tag exists; the API token file named in this config is missing."
+  },
+  {
+   "id": 11,
+   "title": "Trading float",
+   "ref": "estado/wallet.json",
+   "as_of": "2026-10-23T22:57:54-05:00",
+   "note": "Snapshot of our own trading wallet: amount put in, current value, profit or loss. Not customer money."
+  },
+  {
+   "id": 12,
+   "title": "This week's goals",
+   "ref": "estado/metas_semana.json",
+   "as_of": "2026-10-23T22:58:59-05:00",
+   "note": "Goals for the current week. The proof column is computed at every build; hand editing status is not allowed."
+  },
+  {
+   "id": 13,
+   "title": "This page's data",
+   "ref": "/progress/progreso.json",
+   "as_of": "2026-10-23T22:58:48-05:00",
+   "note": "The same data that renders this page, published as open JSON so every number can be checked."
+  }
+ ]
+}

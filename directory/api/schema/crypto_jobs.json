@@ -1,0 +1,271 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://echolike.app/directory/api/schema/crypto_jobs.json",
+ "title": "Crypto jobs",
+ "type": "object",
+ "properties": {
+  "fields": {
+   "type": "object",
+   "properties": {
+    "name": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Name",
+         "x-kind": "text",
+         "x-source": "seed",
+         "type": "string",
+         "description": "The project's name."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "url": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Website",
+         "x-kind": "url",
+         "x-source": "seed",
+         "type": "string",
+         "format": "uri",
+         "description": "The project's official website."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "company": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Company",
+         "x-kind": "ref",
+         "x-source": "ai",
+         "x-ref-type": "protocols",
+         "type": "string",
+         "description": "The company hiring, linked to its directory entry."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "role": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Role",
+         "x-kind": "enum",
+         "x-source": "ai",
+         "enum": [
+          "engineering",
+          "design",
+          "marketing",
+          "bd",
+          "research",
+          "ops",
+          "other"
+         ],
+         "description": "The kind of job, such as engineering or marketing."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "remote": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Remote",
+         "x-kind": "bool",
+         "x-source": "ai",
+         "type": "boolean",
+         "description": "Yes when the job can be done fully remotely."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "pay": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Pay",
+         "x-kind": "money",
+         "x-source": "ai",
+         "x-unit": "USD",
+         "type": "object",
+         "properties": {
+          "usd": {
+           "type": "number",
+           "minimum": 0
+          },
+          "period": {
+           "enum": [
+            "one_time",
+            "month",
+            "year",
+            "per_call",
+            "per_1M_tokens",
+            "per_GB",
+            "per_hour",
+            "per_seat_month"
+           ]
+          }
+         },
+         "required": [
+          "usd",
+          "period"
+         ],
+         "description": "The advertised pay in US dollars and its period, usually per year."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "posted": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Posted",
+         "x-kind": "date",
+         "x-source": "ai",
+         "type": "string",
+         "format": "date",
+         "description": "Date the job was posted."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "notes": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Notes",
+         "x-kind": "text",
+         "x-source": "manual",
+         "type": "string",
+         "description": "Our editorial notes about this entry."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    }
+   }
+  }
+ }
+}

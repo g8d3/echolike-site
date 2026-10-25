@@ -1,0 +1,373 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://echolike.app/directory/api/schema/cybersecurity_stocks.json",
+ "title": "Cybersecurity stocks",
+ "type": "object",
+ "properties": {
+  "fields": {
+   "type": "object",
+   "properties": {
+    "name": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Name",
+         "x-kind": "text",
+         "x-source": "seed",
+         "type": "string",
+         "description": "The project's name."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "ticker": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Ticker",
+         "x-kind": "id",
+         "x-source": "edgar",
+         "type": "string",
+         "description": "The ticker symbol the stock trades under on its exchange."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "exchange": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Exchange",
+         "x-kind": "id",
+         "x-source": "edgar",
+         "type": "string",
+         "description": "The stock exchange where the shares are listed."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "segment": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Security segment",
+         "x-kind": "enum",
+         "x-source": "edgar",
+         "enum": [
+          "endpoint",
+          "cloud",
+          "identity",
+          "network",
+          "siem",
+          "email",
+          "appsec",
+          "ot"
+         ],
+         "description": "The part of cybersecurity the company focuses on most."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "revenue_ttm_usd": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Revenue, latest fiscal year ($)",
+         "x-kind": "usd",
+         "x-source": "edgar",
+         "x-unit": "USD",
+         "type": "number",
+         "minimum": 0,
+         "description": "Revenue for the company's latest complete fiscal year in US dollars, from the annual report it filed with the SEC."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "revenue_growth_yoy_pct": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Revenue growth, year over year (%)",
+         "x-kind": "percent",
+         "x-source": "edgar",
+         "x-unit": "percent",
+         "type": "number",
+         "minimum": 0,
+         "maximum": 100,
+         "description": "Change in that fiscal-year revenue versus the year before, in percent, calculated from two annual revenue facts filed with the SEC."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "gross_margin_pct": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Gross margin (%)",
+         "x-kind": "percent",
+         "x-source": "edgar",
+         "x-unit": "percent",
+         "type": "number",
+         "minimum": 0,
+         "maximum": 100,
+         "description": "Gross profit as a share of revenue, in percent, from the latest filed annual report."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "price_to_sales": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Price to sales ratio",
+         "x-kind": "number",
+         "x-source": "edgar",
+         "type": "number",
+         "description": "Market cap divided by yearly revenue, left empty until a price source with a republishable license is available."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "arr_usd": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Annual recurring revenue ($)",
+         "x-kind": "usd",
+         "x-source": "edgar",
+         "x-unit": "USD",
+         "type": "number",
+         "minimum": 0,
+         "description": "Annualized recurring revenue in US dollars, when the filing reports it as XBRL."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "tokenized_version": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Tokenized version",
+         "x-kind": "url",
+         "x-source": "edgar",
+         "type": "string",
+         "format": "uri",
+         "description": "Link to a tokenized share of the stock trading on a blockchain."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "crypto_comparables": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Crypto comparables",
+         "x-kind": "ref_list",
+         "x-source": "edgar",
+         "x-ref-type": "protocols",
+         "type": "array",
+         "items": {
+          "type": "string"
+         },
+         "description": "Crypto security protocols doing similar work, linked to their directory entries."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    },
+    "notes": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "anyOf": [
+        {
+         "title": "Notes",
+         "x-kind": "text",
+         "x-source": "manual",
+         "type": "string",
+         "description": "Our editorial notes about this entry."
+        },
+        {
+         "type": "null"
+        }
+       ]
+      },
+      "conf": {
+       "type": "number"
+      },
+      "src": {
+       "type": "string"
+      },
+      "ts": {
+       "type": "string"
+      }
+     }
+    }
+   }
+  }
+ }
+}
