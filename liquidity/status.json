@@ -1,0 +1,36 @@
+{
+ "mode": "paper_trade",
+ "strategy": "pure market making (simple PMM, V2 script)",
+ "exchange": "binance_paper_trade",
+ "pair": "ETH-USDT",
+ "spread_bps": [
+  10.0,
+  10.0
+ ],
+ "order_amount": 0.01,
+ "refresh_s": 15,
+ "mid_price": 2362.595,
+ "started_at": 1792895131,
+ "uptime_s": 123,
+ "orders_placed": 18,
+ "fills_total": 0,
+ "recent_fills": [],
+ "active_orders": [
+  {
+   "side": "BUY",
+   "price": 2360.232405,
+   "amount": 0.01
+  },
+  {
+   "side": "SELL",
+   "price": 2364.957595,
+   "amount": 0.01
+  }
+ ],
+ "balances": {
+  "base": 20.0,
+  "quote": 100000.0
+ },
+ "paper_pnl_quote": 0.0,
+ "updated_at": 1792895255
+}
