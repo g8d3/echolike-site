@@ -9,41 +9,89 @@
  ],
  "order_amount": 0.01,
  "refresh_s": 15,
- "mid_price": 2334.685,
+ "mid_price": 2347.125,
  "started_at": 1792955483,
- "uptime_s": 9288,
- "orders_placed": 1238,
- "fills_total": 2,
+ "uptime_s": 12905,
+ "orders_placed": 1722,
+ "fills_total": 16,
  "recent_fills": [
   {
-   "t": 1792963498,
+   "t": 1792965714,
    "side": "BUY",
    "amount": 0.01,
-   "price": 2339.463
+   "price": 2342.111
   },
   {
-   "t": 1792964722,
+   "t": 1792965746,
+   "side": "SELL",
+   "amount": 0.01,
+   "price": 2343.026
+  },
+  {
+   "t": 1792965755,
+   "side": "SELL",
+   "amount": 0.01,
+   "price": 2346.239
+  },
+  {
+   "t": 1792965790,
    "side": "BUY",
    "amount": 0.01,
-   "price": 2335.537
+   "price": 2345.887
+  },
+  {
+   "t": 1792965800,
+   "side": "SELL",
+   "amount": 0.01,
+   "price": 2348.221
+  },
+  {
+   "t": 1792965818,
+   "side": "BUY",
+   "amount": 0.01,
+   "price": 2347.136
+  },
+  {
+   "t": 1792965830,
+   "side": "SELL",
+   "amount": 0.01,
+   "price": 2349.632
+  },
+  {
+   "t": 1792965851,
+   "side": "BUY",
+   "amount": 0.01,
+   "price": 2349.163
+  },
+  {
+   "t": 1792965891,
+   "side": "SELL",
+   "amount": 0.01,
+   "price": 2349.522
+  },
+  {
+   "t": 1792966407,
+   "side": "BUY",
+   "amount": 0.01,
+   "price": 2340.602
   }
  ],
  "active_orders": [
   {
    "side": "BUY",
-   "price": 2332.500165,
+   "price": 2344.777875,
    "amount": 0.01
   },
   {
    "side": "SELL",
-   "price": 2337.169835,
+   "price": 2349.472125,
    "amount": 0.01
   }
  ],
  "balances": {
-  "base": 20.01998,
-  "quote": 99953.25
+  "base": 19.99992,
+  "quote": 100000.02272335
  },
- "paper_pnl_quote": -0.103,
- "updated_at": 1792964772
+ "paper_pnl_quote": -0.165,
+ "updated_at": 1792968389
 }
