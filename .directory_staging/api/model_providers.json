@@ -1,0 +1,137 @@
+{
+ "type": "model_providers",
+ "title": "AI model providers & inference APIs",
+ "status": "planned",
+ "updated": "2026-10-22T11:58:10-05:00",
+ "columns": [
+  {
+   "key": "name",
+   "label": "Name",
+   "kind": "text",
+   "source": "seed",
+   "type": "text"
+  },
+  {
+   "key": "url",
+   "label": "Site",
+   "kind": "url",
+   "source": "seed",
+   "type": "url"
+  },
+  {
+   "key": "provider_id",
+   "label": "Canonical id",
+   "kind": "enum",
+   "source": "ai",
+   "vocab": "providers",
+   "desc": "shared id used by harnesses.native_providers",
+   "type": "enum"
+  },
+  {
+   "key": "model_count",
+   "label": "Models",
+   "kind": "count",
+   "source": "ai",
+   "type": "int"
+  },
+  {
+   "key": "price_in",
+   "label": "$ / 1M input (reference mid model)",
+   "kind": "usd_per_1m_tokens",
+   "source": "ai",
+   "type": "usd_per_1m_tokens"
+  },
+  {
+   "key": "price_out",
+   "label": "$ / 1M output (reference mid model)",
+   "kind": "usd_per_1m_tokens",
+   "source": "ai",
+   "type": "usd_per_1m_tokens"
+  },
+  {
+   "key": "openai_compatible",
+   "label": "OpenAI-compatible API",
+   "kind": "bool",
+   "source": "ai",
+   "type": "bool"
+  },
+  {
+   "key": "anthropic_compatible",
+   "label": "Anthropic-compatible API",
+   "kind": "bool",
+   "source": "ai",
+   "type": "bool"
+  },
+  {
+   "key": "crypto_pay",
+   "label": "Pays in crypto",
+   "kind": "bool",
+   "source": "ai",
+   "type": "bool"
+  },
+  {
+   "key": "free_tier",
+   "label": "Free tier",
+   "kind": "bool",
+   "source": "ai",
+   "type": "bool"
+  },
+  {
+   "key": "pricing_model",
+   "label": "Pricing model",
+   "kind": "enum",
+   "vocab": "pricing_model",
+   "source": "ai",
+   "type": "enum"
+  },
+  {
+   "key": "notes",
+   "label": "Notes",
+   "kind": "text",
+   "source": "manual",
+   "type": "text"
+  }
+ ],
+ "entities": [
+  {
+   "id": "openrouter",
+   "name": "OpenRouter",
+   "repo": null,
+   "url": "https://openrouter.ai",
+   "aliases": [],
+   "fork_of": null,
+   "fields": {
+    "provider_id": {
+     "value": "openrouter",
+     "conf": 1.0,
+     "src": "https://openrouter.ai",
+     "ts": "2026-10-22T14:29:13-05:00",
+     "verified_by": "human"
+    }
+   },
+   "flags": [],
+   "changelog": [],
+   "checked": "2026-10-22T11:58:10-05:00"
+  },
+  {
+   "id": "opencode-go",
+   "name": "OpenCode Go",
+   "repo": null,
+   "url": "https://opencode.ai",
+   "aliases": [],
+   "fork_of": null,
+   "fields": {
+    "provider_id": {
+     "value": "opencode",
+     "conf": 1.0,
+     "src": "https://opencode.ai",
+     "ts": "2026-10-22T14:29:13-05:00",
+     "verified_by": "human"
+    }
+   },
+   "flags": [],
+   "changelog": [],
+   "checked": "2026-10-22T11:58:10-05:00"
+  }
+ ]
+}

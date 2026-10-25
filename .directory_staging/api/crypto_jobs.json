@@ -1,0 +1,76 @@
+{
+ "type": "crypto_jobs",
+ "title": "Crypto jobs",
+ "status": "planned",
+ "updated": null,
+ "columns": [
+  {
+   "key": "name",
+   "label": "Name",
+   "kind": "text",
+   "source": "seed",
+   "type": "text"
+  },
+  {
+   "key": "url",
+   "label": "Site",
+   "kind": "url",
+   "source": "seed",
+   "type": "url"
+  },
+  {
+   "key": "company",
+   "label": "Company",
+   "kind": "ref",
+   "source": "ai",
+   "ref_type": "protocols",
+   "type": "ref"
+  },
+  {
+   "key": "role",
+   "label": "Role",
+   "kind": "enum",
+   "source": "ai",
+   "vocab": [
+    "engineering",
+    "design",
+    "marketing",
+    "bd",
+    "research",
+    "ops",
+    "other"
+   ],
+   "type": "enum"
+  },
+  {
+   "key": "remote",
+   "label": "Remote",
+   "kind": "bool",
+   "source": "ai",
+   "type": "bool"
+  },
+  {
+   "key": "pay",
+   "label": "Pay",
+   "kind": "money",
+   "source": "ai",
+   "desc": "period year for salaries",
+   "type": "money"
+  },
+  {
+   "key": "posted",
+   "label": "Posted",
+   "kind": "date",
+   "source": "ai",
+   "type": "date"
+  },
+  {
+   "key": "notes",
+   "label": "Notes",
+   "kind": "text",
+   "source": "manual",
+   "type": "text"
+  }
+ ],
+ "entities": []
+}

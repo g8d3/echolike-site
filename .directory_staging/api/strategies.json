@@ -1,0 +1,73 @@
+{
+ "type": "strategies",
+ "title": "Published trading strategies (re-tested)",
+ "status": "planned",
+ "updated": null,
+ "columns": [
+  {
+   "key": "name",
+   "label": "Name",
+   "kind": "text",
+   "source": "seed",
+   "type": "text"
+  },
+  {
+   "key": "url",
+   "label": "Site",
+   "kind": "url",
+   "source": "seed",
+   "type": "url"
+  },
+  {
+   "key": "source_post",
+   "label": "Source post",
+   "kind": "url",
+   "source": "ai",
+   "type": "url"
+  },
+  {
+   "key": "market",
+   "label": "Market",
+   "kind": "id",
+   "source": "ai",
+   "type": "id"
+  },
+  {
+   "key": "timeframe_minutes",
+   "label": "Timeframe (min)",
+   "kind": "number",
+   "source": "ai",
+   "type": "number"
+  },
+  {
+   "key": "test_sharpe",
+   "label": "Test Sharpe",
+   "kind": "number",
+   "source": "lab",
+   "type": "number"
+  },
+  {
+   "key": "test_trades",
+   "label": "Test trades",
+   "kind": "count",
+   "source": "lab",
+   "type": "int"
+  },
+  {
+   "key": "verdict",
+   "label": "Verdict",
+   "kind": "enum",
+   "source": "lab",
+   "vocab": "verdict",
+   "type": "enum"
+  },
+  {
+   "key": "notes",
+   "label": "Notes",
+   "kind": "text",
+   "source": "manual",
+   "type": "text"
+  }
+ ],
+ "entities": []
+}

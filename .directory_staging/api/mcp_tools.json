@@ -1,0 +1,130 @@
+{
+ "type": "mcp_tools",
+ "title": "MCP servers & agent tools",
+ "status": "planned",
+ "updated": null,
+ "columns": [
+  {
+   "key": "name",
+   "label": "Name",
+   "kind": "text",
+   "source": "seed",
+   "type": "text"
+  },
+  {
+   "key": "url",
+   "label": "Site",
+   "kind": "url",
+   "source": "seed",
+   "type": "url"
+  },
+  {
+   "key": "repo",
+   "label": "Repo",
+   "kind": "id",
+   "source": "seed",
+   "type": "id"
+  },
+  {
+   "key": "stars",
+   "label": "Stars",
+   "kind": "count",
+   "source": "github",
+   "type": "int"
+  },
+  {
+   "key": "license",
+   "label": "License (SPDX)",
+   "kind": "id",
+   "source": "github",
+   "type": "id"
+  },
+  {
+   "key": "last_commit",
+   "label": "Last commit",
+   "kind": "date",
+   "source": "github",
+   "type": "date"
+  },
+  {
+   "key": "category",
+   "label": "Category",
+   "kind": "enum",
+   "source": "ai",
+   "vocab": [
+    "data",
+    "dev",
+    "browser",
+    "finance",
+    "crypto",
+    "search",
+    "productivity",
+    "media",
+    "other"
+   ],
+   "type": "enum"
+  },
+  {
+   "key": "transport",
+   "label": "Transport",
+   "kind": "enum_list",
+   "source": "ai",
+   "vocab": [
+    "stdio",
+    "sse",
+    "streamable_http"
+   ],
+   "type": "list"
+  },
+  {
+   "key": "auth",
+   "label": "Auth",
+   "kind": "enum",
+   "source": "ai",
+   "vocab": [
+    "none",
+    "api_key",
+    "oauth"
+   ],
+   "type": "enum"
+  },
+  {
+   "key": "pricing_model",
+   "label": "Pricing model",
+   "kind": "enum",
+   "vocab": "pricing_model",
+   "source": "ai",
+   "type": "enum"
+  },
+  {
+   "key": "software_cost",
+   "label": "Software cost",
+   "kind": "money",
+   "source": "ai",
+   "desc": "license/software price; 0 one_time for free OSS",
+   "type": "money"
+  },
+  {
+   "key": "free_tier",
+   "label": "Free tier",
+   "kind": "bool",
+   "source": "ai",
+   "type": "bool"
+  },
+  {
+   "key": "summary",
+   "label": "Summary",
+   "kind": "text",
+   "source": "ai",
+   "type": "text"
+  },
+  {
+   "key": "notes",
+   "label": "Notes",
+   "kind": "text",
+   "source": "manual",
+   "type": "text"
+  }
+ ],
+ "entities": []
+}

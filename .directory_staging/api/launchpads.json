@@ -1,0 +1,80 @@
+{
+ "type": "launchpads",
+ "title": "Token launchpads",
+ "status": "planned",
+ "updated": null,
+ "columns": [
+  {
+   "key": "name",
+   "label": "Name",
+   "kind": "text",
+   "source": "seed",
+   "type": "text"
+  },
+  {
+   "key": "url",
+   "label": "Site",
+   "kind": "url",
+   "source": "seed",
+   "type": "url"
+  },
+  {
+   "key": "chains",
+   "label": "Chains",
+   "kind": "enum_list",
+   "vocab": "chains",
+   "source": "ai",
+   "type": "list"
+  },
+  {
+   "key": "launch_fee",
+   "label": "Launch fee",
+   "kind": "money",
+   "source": "ai",
+   "type": "money"
+  },
+  {
+   "key": "trade_fee_bps",
+   "label": "Trade fee (bps)",
+   "kind": "bps",
+   "source": "ai",
+   "type": "bps"
+  },
+  {
+   "key": "creator_fee_bps",
+   "label": "Creator fee (bps)",
+   "kind": "bps",
+   "source": "ai",
+   "type": "bps"
+  },
+  {
+   "key": "graduation_mcap_usd",
+   "label": "Graduation market cap (USD)",
+   "kind": "usd",
+   "source": "ai",
+   "type": "usd"
+  },
+  {
+   "key": "kyc",
+   "label": "KYC required",
+   "kind": "bool",
+   "source": "ai",
+   "type": "bool"
+  },
+  {
+   "key": "api",
+   "label": "Public API",
+   "kind": "bool",
+   "source": "ai",
+   "type": "bool"
+  },
+  {
+   "key": "notes",
+   "label": "Notes",
+   "kind": "text",
+   "source": "manual",
+   "type": "text"
+  }
+ ],
+ "entities": []
+}
