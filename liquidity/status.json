@@ -9,89 +9,89 @@
  ],
  "order_amount": 0.01,
  "refresh_s": 15,
- "mid_price": 2315.235,
+ "mid_price": 2329.255,
  "started_at": 1792978447,
- "uptime_s": 21949,
- "orders_placed": 2928,
- "fills_total": 38,
+ "uptime_s": 25565,
+ "orders_placed": 3410,
+ "fills_total": 49,
  "recent_fills": [
   {
-   "t": 1792983967,
-   "side": "BUY",
-   "amount": 0.01,
-   "price": 2316.356
-  },
-  {
-   "t": 1792985467,
+   "t": 1793001865,
    "side": "SELL",
    "amount": 0.01,
-   "price": 2307.911
+   "price": 2310.864
   },
   {
-   "t": 1792986351,
+   "t": 1793002251,
    "side": "BUY",
    "amount": 0.01,
-   "price": 2303.289
+   "price": 2305.597
   },
   {
-   "t": 1792986829,
+   "t": 1793002369,
    "side": "BUY",
    "amount": 0.01,
-   "price": 2295.397
+   "price": 2305.038
   },
   {
-   "t": 1792986843,
+   "t": 1793002636,
+   "side": "SELL",
+   "amount": 0.01,
+   "price": 2313.726
+  },
+  {
+   "t": 1793002655,
+   "side": "SELL",
+   "amount": 0.01,
+   "price": 2315.989
+  },
+  {
+   "t": 1793002667,
+   "side": "SELL",
+   "amount": 0.01,
+   "price": 2318.051
+  },
+  {
+   "t": 1793002717,
    "side": "BUY",
    "amount": 0.01,
-   "price": 2294.159
+   "price": 2317.825
   },
   {
-   "t": 1792987120,
+   "t": 1793003199,
    "side": "SELL",
    "amount": 0.01,
-   "price": 2303.857
+   "price": 2320.423
   },
   {
-   "t": 1792988145,
+   "t": 1793003228,
    "side": "SELL",
    "amount": 0.01,
-   "price": 2318.781
+   "price": 2321.074
   },
   {
-   "t": 1792992369,
+   "t": 1793003243,
    "side": "SELL",
    "amount": 0.01,
-   "price": 2329.032
-  },
-  {
-   "t": 1792998048,
-   "side": "SELL",
-   "amount": 0.01,
-   "price": 2325.528
-  },
-  {
-   "t": 1792999836,
-   "side": "BUY",
-   "amount": 0.01,
-   "price": 2314.159
+   "price": 2323.726
   }
  ],
  "active_orders": [
   {
    "side": "BUY",
-   "price": 2312.919765,
+   "price": 2326.506165,
    "amount": 0.01
   },
   {
    "side": "SELL",
-   "price": 2317.550235,
+   "price": 2331.163835,
    "amount": 0.01
   }
  ],
  "balances": {
-  "base": 19.99981,
-  "quote": 100000.5728768
+  "base": 19.96977,
+  "quote": 100070.27462827
  },
- "paper_pnl_quote": 0.133,
- "updated_at": 1793000397
+ "paper_pnl_quote": -0.1388,
+ "updated_at": 1793004013
 }
