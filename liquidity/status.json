@@ -9,84 +9,89 @@
  ],
  "order_amount": 0.01,
  "refresh_s": 15,
- "mid_price": 2319.795,
+ "mid_price": 2321.845,
  "started_at": 1792955483,
- "uptime_s": 16516,
- "orders_placed": 2202,
- "fills_total": 33,
+ "uptime_s": 20258,
+ "orders_placed": 2702,
+ "fills_total": 44,
  "recent_fills": [
   {
-   "t": 1792971047,
+   "t": 1792972265,
    "side": "BUY",
    "amount": 0.01,
-   "price": 2318.394
+   "price": 2317.925
   },
   {
-   "t": 1792971073,
+   "t": 1792972457,
+   "side": "SELL",
+   "amount": 0.01,
+   "price": 2327.971
+  },
+  {
+   "t": 1792972524,
+   "side": "SELL",
+   "amount": 0.01,
+   "price": 2328.912
+  },
+  {
+   "t": 1792972541,
+   "side": "SELL",
+   "amount": 0.01,
+   "price": 2331.344
+  },
+  {
+   "t": 1792972600,
+   "side": "SELL",
+   "amount": 0.01,
+   "price": 2331.524
+  },
+  {
+   "t": 1792973513,
+   "side": "SELL",
+   "amount": 0.01,
+   "price": 2333.927
+  },
+  {
+   "t": 1792973889,
+   "side": "SELL",
+   "amount": 0.01,
+   "price": 2330.143
+  },
+  {
+   "t": 1792974132,
+   "side": "SELL",
+   "amount": 0.01,
+   "price": 2331.524
+  },
+  {
+   "t": 1792975285,
+   "side": "SELL",
+   "amount": 0.01,
+   "price": 2328.661
+  },
+  {
+   "t": 1792975704,
    "side": "BUY",
    "amount": 0.01,
-   "price": 2314.188
-  },
-  {
-   "t": 1792971085,
-   "side": "SELL",
-   "amount": 0.01,
-   "price": 2318.822
-  },
-  {
-   "t": 1792971158,
-   "side": "SELL",
-   "amount": 0.01,
-   "price": 2323.116
-  },
-  {
-   "t": 1792971191,
-   "side": "SELL",
-   "amount": 0.01,
-   "price": 2324.317
-  },
-  {
-   "t": 1792971263,
-   "side": "SELL",
-   "amount": 0.01,
-   "price": 2330.303
-  },
-  {
-   "t": 1792971277,
-   "side": "SELL",
-   "amount": 0.01,
-   "price": 2332.395
-  },
-  {
-   "t": 1792971947,
-   "side": "BUY",
-   "amount": 0.01,
-   "price": 2325.058
-  },
-  {
-   "t": 1792971972,
-   "side": "BUY",
-   "amount": 0.01,
-   "price": 2321.651
-  },
-  {
-   "t": 1792971992,
-   "side": "BUY",
-   "amount": 0.01,
-   "price": 2318.055
+   "price": 2320.752
   }
  ],
  "active_orders": [
   {
+   "side": "BUY",
+   "price": 2319.093585,
+   "amount": 0.01
+  },
+  {
    "side": "SELL",
-   "price": 2322.695375,
+   "price": 2323.736415,
    "amount": 0.01
   }
  ],
  "balances": {
-  "base": 20.00983,
-  "quote": 99976.9277321
+  "base": 19.9598,
+  "quote": 100093.61903204
  },
- "paper_pnl_quote": -0.2687,
- "updated_at": 1792972000
+ "paper_pnl_quote": 0.2809,
+ "updated_at": 1792975742
 }
