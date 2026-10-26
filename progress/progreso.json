@@ -1,8 +1,8 @@
 {
- "generated_at": "2026-10-25T16:25:49-05:00",
- "week": "2026-W43",
- "week_start": "2026-10-19",
- "week_end": "2026-10-25",
+ "generated_at": "2026-10-26T10:18:15-05:00",
+ "week": "2026-W44",
+ "week_start": "2026-10-26",
+ "week_end": "2026-11-01",
  "outcomes": {
   "items": [
    {
@@ -17,7 +17,7 @@
     "first_live": "2026-10-21T09:43:31-05:00",
     "first_live_method": "first full-site upload (per-page date not recorded)",
     "first_live_evidence": "funding_publicar.log, Oct 21, 2026 09:43 Bogotá, 39 files",
-    "checked_at": "2026-10-25T16:25:49-05:00"
+    "checked_at": "2026-10-26T10:18:15-05:00"
    },
    {
     "path": "/directory/",
@@ -31,7 +31,7 @@
     "first_live": "2026-10-22T14:52:55-05:00",
     "first_live_method": "first full-site upload after this page was built",
     "first_live_evidence": "funding_publicar.log, Oct 22, 2026 14:52 Bogotá, 140 files",
-    "checked_at": "2026-10-25T16:25:49-05:00"
+    "checked_at": "2026-10-26T10:18:15-05:00"
    },
    {
     "path": "/progress/live/",
@@ -45,7 +45,7 @@
     "first_live": "2026-10-21T09:43:31-05:00",
     "first_live_method": "first full-site upload (per-page date not recorded)",
     "first_live_evidence": "funding_publicar.log, Oct 21, 2026 09:43 Bogotá, 39 files",
-    "checked_at": "2026-10-25T16:25:49-05:00"
+    "checked_at": "2026-10-26T10:18:15-05:00"
    },
    {
     "path": "/funding-rates/",
@@ -59,7 +59,7 @@
     "first_live": "2026-10-21T09:43:31-05:00",
     "first_live_method": "first upload in the hourly publish log",
     "first_live_evidence": "funding_publicar.log, Oct 21, 2026 09:43 Bogotá, 39 files",
-    "checked_at": "2026-10-25T16:25:49-05:00"
+    "checked_at": "2026-10-26T10:18:15-05:00"
    },
    {
     "path": "/extension/",
@@ -73,7 +73,7 @@
     "first_live": "2026-10-21T09:43:31-05:00",
     "first_live_method": "first full-site upload (per-page date not recorded)",
     "first_live_evidence": "funding_publicar.log, Oct 21, 2026 09:43 Bogotá, 39 files",
-    "checked_at": "2026-10-25T16:25:49-05:00"
+    "checked_at": "2026-10-26T10:18:15-05:00"
    },
    {
     "path": "/links/",
@@ -87,7 +87,7 @@
     "first_live": "2026-10-21T09:43:31-05:00",
     "first_live_method": "first full-site upload (per-page date not recorded)",
     "first_live_evidence": "funding_publicar.log, Oct 21, 2026 09:43 Bogotá, 39 files",
-    "checked_at": "2026-10-25T16:25:49-05:00"
+    "checked_at": "2026-10-26T10:18:15-05:00"
    },
    {
     "path": "/products/",
@@ -101,7 +101,7 @@
     "first_live": "2026-10-21T09:43:31-05:00",
     "first_live_method": "first full-site upload (per-page date not recorded)",
     "first_live_evidence": "funding_publicar.log, Oct 21, 2026 09:43 Bogotá, 39 files",
-    "checked_at": "2026-10-25T16:25:49-05:00"
+    "checked_at": "2026-10-26T10:18:15-05:00"
    },
    {
     "path": "/archive/",
@@ -115,7 +115,7 @@
     "first_live": "2026-10-21T09:43:31-05:00",
     "first_live_method": "first full-site upload (per-page date not recorded)",
     "first_live_evidence": "funding_publicar.log, Oct 21, 2026 09:43 Bogotá, 39 files",
-    "checked_at": "2026-10-25T16:25:49-05:00"
+    "checked_at": "2026-10-26T10:18:15-05:00"
    },
    {
     "path": "/privacy/",
@@ -129,7 +129,7 @@
     "first_live": "2026-10-21T09:43:31-05:00",
     "first_live_method": "first full-site upload (per-page date not recorded)",
     "first_live_evidence": "funding_publicar.log, Oct 21, 2026 09:43 Bogotá, 39 files",
-    "checked_at": "2026-10-25T16:25:49-05:00"
+    "checked_at": "2026-10-26T10:18:15-05:00"
    },
    {
     "path": "/progress/",
@@ -143,12 +143,12 @@
     "first_live": "2026-10-23T11:09:05-05:00",
     "first_live_method": "first build of this page (published in the same run)",
     "first_live_evidence": "build time Oct 23, 2026 11:09 Bogotá; the publisher refuses to finish without a verified upload",
-    "checked_at": "2026-10-25T16:25:49-05:00"
+    "checked_at": "2026-10-26T10:18:15-05:00"
    }
   ],
   "live": 10,
   "total": 10,
-  "checked_at": "2026-10-25T16:25:49-05:00"
+  "checked_at": "2026-10-26T10:18:15-05:00"
  },
  "usage": {
   "visits": {
@@ -164,13 +164,13 @@
    "source": 3
   },
   "likes": {
-   "received": 543,
-   "ideas": 398,
+   "received": 633,
+   "ideas": 478,
    "ideas_with_step_done": 18,
    "steps_done": 19,
    "alerts": 20,
    "alerts_with_next_step": 20,
-   "as_of": "2026-10-25T15:38:02-05:00",
+   "as_of": "2026-10-26T00:04:21-05:00",
    "sources": {
     "received": 4,
     "ideas": 5,
@@ -185,17 +185,26 @@
     "start": "2026-10-19",
     "end": "2026-10-25",
     "founder": 14,
-    "ai": 712,
+    "ai": 0,
     "qa": 0,
-    "founder_share_pct": 1.9
+    "founder_share_pct": 100.0
+   },
+   {
+    "week": "2026-W44",
+    "start": "2026-10-26",
+    "end": "2026-11-01",
+    "founder": 0,
+    "ai": 0,
+    "qa": 0,
+    "founder_share_pct": null
    }
   ],
   "trend": {
    "direction": "unknown",
    "text": "No trend yet: one week of records so far. If the founder share falls next week, mistakes are being caught before they reach the founder."
   },
-  "review_report": "reportes/revision_directorio_2026-10-23.md",
-  "as_of": "2026-10-25T16:25:49-05:00"
+  "review_report": null,
+  "as_of": "2026-10-26T10:18:15-05:00"
  },
  "goals": {
   "week": "2026-W43",
@@ -219,7 +228,7 @@
      "https://echolike.app/directory/ answered 200",
      "https://echolike.app/directory/rules/ answered 200"
     ],
-    "checked_at": "2026-10-25T16:25:49-05:00"
+    "checked_at": "2026-10-26T10:18:15-05:00"
    },
    {
     "id": "cyber-ps",
@@ -233,12 +242,12 @@
      "published": true
     },
     "status": "not_done",
-    "reason": "Not done: 0 of 0 entries have a sourced price to sales value and the published table answered 200. The proof paths are listed below.",
+    "reason": "Not done: 0 of 5 entries have a sourced price to sales value and the published table answered 200. The proof paths are listed below.",
     "evidence": [
-     "0 of 0 entries have a value for price_to_sales in directorio/datos/cybersecurity_stocks.json",
+     "0 of 5 entries have a value for price_to_sales in directorio/datos/cybersecurity_stocks.json",
      "https://echolike.app/directory/cybersecurity_stocks/ answered 200"
     ],
-    "checked_at": "2026-10-25T16:25:49-05:00"
+    "checked_at": "2026-10-26T10:18:15-05:00"
    },
    {
     "id": "usage-per-key",
@@ -259,7 +268,7 @@
      "missing: estado/uso_por_clave.json",
      "missing: unico/usage-per-key/index.html"
     ],
-    "checked_at": "2026-10-25T16:25:49-05:00"
+    "checked_at": "2026-10-26T10:18:15-05:00"
    },
    {
     "id": "likes-minipc",
@@ -272,12 +281,12 @@
      "max_age_hours": 3
     },
     "status": "not_done",
-    "reason": "Not done: timer is inactive and the last record is 41.4 hours old (limit 3).",
+    "reason": "Not done: timer is inactive and the last record is 59.3 hours old (limit 3).",
     "evidence": [
      "echolike-likes.timer is inactive",
-     "last record in estado/likes_ultimo.json is 41.4 hours old"
+     "last record in estado/likes_ultimo.json is 59.3 hours old"
     ],
-    "checked_at": "2026-10-25T16:25:49-05:00"
+    "checked_at": "2026-10-26T10:18:15-05:00"
    },
    {
     "id": "full-threads",
@@ -298,15 +307,15 @@
      "missing: posts_publicados/*thread*",
      "missing: posts_publicados/*hilo*"
     ],
-    "checked_at": "2026-10-25T16:25:49-05:00"
+    "checked_at": "2026-10-26T10:18:15-05:00"
    }
   ],
   "done": 1,
   "total": 5,
   "file": "estado/metas_semana.json",
-  "as_of": "2026-10-25T16:25:49-05:00",
-  "current_week": "2026-W43",
-  "stale": false
+  "as_of": "2026-10-26T10:18:15-05:00",
+  "current_week": "2026-W44",
+  "stale": true
  },
  "money": {
   "revenue": {
@@ -336,8 +345,8 @@
   "goals_done": 1,
   "goals_total": 5,
   "corrections_founder": 14,
-  "corrections_ai": 712,
-  "founder_share_pct": 1.9,
+  "corrections_ai": 0,
+  "founder_share_pct": 100.0,
   "revenue_tracked": false
  },
  "sources": [
@@ -345,91 +354,91 @@
    "id": 1,
    "title": "Live page checks",
    "ref": "https://echolike.app",
-   "as_of": "2026-10-25T16:25:49-05:00",
+   "as_of": "2026-10-26T10:18:15-05:00",
    "note": "Every page in section 1 was requested once while this page was built. The response is recorded per page."
   },
   {
    "id": 2,
    "title": "Publish log",
    "ref": "funding_publicar.log",
-   "as_of": "2026-10-24T09:53:37-05:00",
+   "as_of": null,
    "note": "Local log of the hourly publisher. Each line records the moment a full-site upload succeeded, with the number of files sent."
   },
   {
    "id": 3,
    "title": "Published folder",
    "ref": "unico/",
-   "as_of": "2026-10-25T10:38:09-05:00",
+   "as_of": "2026-10-26T10:11:42-05:00",
    "note": "Local copy of the published site. The folder is not in git, so first-live dates come from the publish log and build times, never from git history."
   },
   {
    "id": 4,
    "title": "Likes captured",
    "ref": "estado/likes_recibidos.json",
-   "as_of": "2026-10-24T09:55:18-05:00",
+   "as_of": "2026-10-26T00:04:21-05:00",
    "note": "Post IDs the browser extension sent from the founder's X likes."
   },
   {
    "id": 5,
    "title": "Ideas from likes",
    "ref": "estado/ideas.json",
-   "as_of": "2026-10-25T15:38:02-05:00",
+   "as_of": "2026-10-26T00:04:21-05:00",
    "note": "Each idea carries the steps needed to act on it and the date a step was finished."
   },
   {
    "id": 6,
    "title": "Open alerts",
    "ref": "estado/likes_alertas.json",
-   "as_of": "2026-10-23T23:01:38-05:00",
+   "as_of": "2026-10-26T00:04:21-05:00",
    "note": "Likes that produced a written next step. The file keeps the most recent alerts only."
   },
   {
    "id": 7,
    "title": "Founder corrections",
    "ref": "directorio/reglas.yaml",
-   "as_of": "2026-10-22T16:38:09-05:00",
+   "as_of": "2026-10-25T23:10:00-05:00",
    "note": "The rules file is the single log of corrections: every new correction is appended with the date it was added."
   },
   {
    "id": 8,
    "title": "Independent AI review",
-   "ref": "reportes/revision_directorio_2026-10-23.md",
-   "as_of": "2026-10-23T21:56:07-05:00",
+   "ref": "reportes/",
+   "as_of": null,
    "note": "Review rounds read the same pages with models different from the builder. Repeated findings across rounds are counted once."
   },
   {
    "id": 9,
    "title": "Automatic reader QA",
    "ref": "reportes/qa_directorio.json",
-   "as_of": "2026-10-25T15:39:54-05:00",
+   "as_of": "2026-10-26T10:13:08-05:00",
    "note": "Machine checks on the directory build: sources, units, labels, phone and desktop rendering."
   },
   {
    "id": 10,
    "title": "Visit count setup",
    "ref": "operador/config.json",
-   "as_of": "2026-10-25T15:50:31-05:00",
+   "as_of": "2026-10-25T23:10:00-05:00",
    "note": "Where a visit counter would be read from. The site tag exists; the API token file named in this config is missing."
   },
   {
    "id": 11,
    "title": "Trading float",
    "ref": "estado/wallet.json",
-   "as_of": "2026-10-24T10:10:25-05:00",
+   "as_of": "2026-10-26T00:04:21-05:00",
    "note": "Snapshot of our own trading wallet: amount put in, current value, profit or loss. Not customer money."
   },
   {
    "id": 12,
    "title": "This week's goals",
    "ref": "estado/metas_semana.json",
-   "as_of": "2026-10-25T16:25:51-05:00",
+   "as_of": "2026-10-26T10:18:16-05:00",
    "note": "Goals for the current week. The proof column is computed at every build; hand editing status is not allowed."
   },
   {
    "id": 13,
    "title": "This page's data",
    "ref": "/progress/progreso.json",
-   "as_of": "2026-10-25T16:25:49-05:00",
+   "as_of": "2026-10-26T10:18:15-05:00",
    "note": "The same data that renders this page, published as open JSON so every number can be checked."
   }
  ]

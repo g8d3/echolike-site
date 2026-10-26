@@ -734,7 +734,7 @@
      "value": true,
      "conf": 1.0,
      "src": "derived:intersects(chat_channels)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     },
     "pricing_model": {
      "value": "free_oss",
@@ -910,19 +910,19 @@
      "value": 0,
      "conf": 1.0,
      "src": "derived:usd_per_month(software_cost)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     },
     "native_provider_count": {
      "value": 3,
      "conf": 1.0,
      "src": "derived:len(native_providers)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     },
     "self_updating_memory": {
      "value": true,
      "conf": 1.0,
      "src": "derived:intersects(memory_writer)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     },
     "free_tier": {
      "value": true,
@@ -1064,7 +1064,7 @@
      "value": true,
      "conf": 1.0,
      "src": "derived:intersects(chat_channels)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     },
     "pricing_model": {
      "value": "free_oss",
@@ -1213,19 +1213,19 @@
      "value": 0,
      "conf": 1.0,
      "src": "derived:usd_per_month(software_cost)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     },
     "native_provider_count": {
      "value": 3,
      "conf": 1.0,
      "src": "derived:len(native_providers)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     },
     "self_updating_memory": {
      "value": true,
      "conf": 1.0,
      "src": "derived:intersects(memory_writer)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     }
    },
    "flags": [
@@ -1345,7 +1345,7 @@
      "value": false,
      "conf": 1.0,
      "src": "derived:intersects(chat_channels)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     },
     "deployment": {
      "value": "self_hosted",
@@ -1387,7 +1387,7 @@
      "value": 5,
      "conf": 1.0,
      "src": "derived:len(native_providers)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     },
     "pricing_model": {
      "value": "free_oss",
@@ -1445,7 +1445,7 @@
      "value": 0,
      "conf": 1.0,
      "src": "derived:usd_per_month(software_cost)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     },
     "flat_fee_usd": {
      "value": 1.23,
@@ -1578,7 +1578,7 @@
      "value": false,
      "conf": 1.0,
      "src": "derived:intersects(chat_channels)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     },
     "pricing_model": {
      "value": "free_oss",
@@ -1608,7 +1608,7 @@
      "value": 0,
      "conf": 1.0,
      "src": "derived:usd_per_month(software_cost)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     },
     "anthropic_compatible": {
      "value": true,
@@ -1755,7 +1755,7 @@
      "value": true,
      "conf": 1.0,
      "src": "derived:intersects(chat_channels)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     },
     "deployment": {
      "value": "self_hosted",
@@ -1819,13 +1819,13 @@
      "value": 0,
      "conf": 1.0,
      "src": "derived:usd_per_month(software_cost)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     },
     "native_provider_count": {
      "value": 4,
      "conf": 1.0,
      "src": "derived:len(native_providers)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     }
    },
    "flags": [
@@ -2008,7 +2008,7 @@
      "value": true,
      "conf": 1.0,
      "src": "derived:intersects(chat_channels)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     },
     "deployment": {
      "value": "self_hosted",
@@ -2053,7 +2053,7 @@
      "value": 0,
      "conf": 1.0,
      "src": "derived:usd_per_month(software_cost)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     }
    },
    "flags": [
@@ -2184,7 +2184,7 @@
      "value": true,
      "conf": 1.0,
      "src": "derived:intersects(chat_channels)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     },
     "pricing_model": {
      "value": "free_oss",
@@ -2301,19 +2301,19 @@
      "value": 0,
      "conf": 1.0,
      "src": "derived:usd_per_month(software_cost)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     },
     "native_provider_count": {
      "value": 13,
      "conf": 1.0,
      "src": "derived:len(native_providers)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     },
     "self_updating_memory": {
      "value": true,
      "conf": 1.0,
      "src": "derived:intersects(memory_writer)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     }
    },
    "flags": [
@@ -2455,7 +2455,7 @@
      "value": true,
      "conf": 1.0,
      "src": "derived:intersects(chat_channels)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     },
     "deployment": {
      "value": "self_hosted",
@@ -2518,13 +2518,13 @@
      "value": 0,
      "conf": 1.0,
      "src": "derived:usd_per_month(software_cost)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     },
     "native_provider_count": {
      "value": 6,
      "conf": 1.0,
      "src": "derived:len(native_providers)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     }
    },
    "flags": [
@@ -2669,7 +2669,7 @@
      "value": true,
      "conf": 1.0,
      "src": "derived:intersects(chat_channels)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     },
     "pricing_model": {
      "value": "free_oss",
@@ -2753,13 +2753,13 @@
      "value": 0,
      "conf": 1.0,
      "src": "derived:usd_per_month(software_cost)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     },
     "native_provider_count": {
      "value": 11,
      "conf": 1.0,
      "src": "derived:len(native_providers)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     }
    },
    "flags": [
@@ -2890,7 +2890,7 @@
      "value": true,
      "conf": 1.0,
      "src": "derived:intersects(chat_channels)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     },
     "deployment": {
      "value": "both",
@@ -2963,7 +2963,7 @@
      "value": true,
      "conf": 1.0,
      "src": "derived:intersects(memory_writer)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     },
     "pricing_model": {
      "value": "free_oss",
@@ -3021,7 +3021,7 @@
      "value": 0,
      "conf": 1.0,
      "src": "derived:usd_per_month(software_cost)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     },
     "flat_fee_usd": {
      "value": 0.1,
@@ -3174,7 +3174,7 @@
      "value": false,
      "conf": 1.0,
      "src": "derived:intersects(chat_channels)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     },
     "deployment": {
      "value": "self_hosted",
@@ -3232,7 +3232,7 @@
      "value": false,
      "conf": 1.0,
      "src": "derived:intersects(memory_writer)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     }
    },
    "flags": [
@@ -3374,7 +3374,7 @@
      "value": false,
      "conf": 1.0,
      "src": "derived:intersects(chat_channels)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     },
     "deployment": {
      "value": "self_hosted",
@@ -3417,13 +3417,13 @@
      "value": 0,
      "conf": 1.0,
      "src": "derived:usd_per_month(software_cost)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     },
     "native_provider_count": {
      "value": 1,
      "conf": 1.0,
      "src": "derived:len(native_providers)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     }
    },
    "flags": [
@@ -3558,7 +3558,7 @@
      "value": false,
      "conf": 1.0,
      "src": "derived:intersects(chat_channels)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     },
     "deployment": {
      "value": "self_hosted",
@@ -3616,7 +3616,7 @@
      "value": 0,
      "conf": 1.0,
      "src": "derived:usd_per_month(software_cost)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     }
    },
    "flags": [
@@ -3776,7 +3776,7 @@
      "value": false,
      "conf": 1.0,
      "src": "derived:intersects(chat_channels)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     },
     "deployment": {
      "value": "both",
@@ -3879,13 +3879,13 @@
      "value": 5,
      "conf": 1.0,
      "src": "derived:len(native_providers)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     },
     "self_updating_memory": {
      "value": true,
      "conf": 1.0,
      "src": "derived:intersects(memory_writer)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     },
     "layer_user_profile": {
      "value": true,
@@ -3955,7 +3955,7 @@
      "value": 0,
      "conf": 1.0,
      "src": "derived:usd_per_month(software_cost)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     }
    },
    "flags": [
@@ -4133,13 +4133,13 @@
      "value": 0,
      "conf": 1.0,
      "src": "derived:usd_per_month(software_cost)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     },
     "native_provider_count": {
      "value": 5,
      "conf": 1.0,
      "src": "derived:len(native_providers)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     }
    },
    "flags": [
@@ -4281,7 +4281,7 @@
      "value": true,
      "conf": 1.0,
      "src": "derived:intersects(chat_channels)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     },
     "consolidation_interval_hours": {
      "value": 24,
@@ -4414,13 +4414,13 @@
      "value": 8,
      "conf": 1.0,
      "src": "derived:len(native_providers)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     },
     "self_updating_memory": {
      "value": true,
      "conf": 1.0,
      "src": "derived:intersects(memory_writer)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     },
     "pricing_model": {
      "value": "subscription",
@@ -4499,7 +4499,7 @@
      "value": 0,
      "conf": 1.0,
      "src": "derived:usd_per_month(software_cost)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     }
    },
    "flags": [
@@ -4634,7 +4634,7 @@
      "value": true,
      "conf": 1.0,
      "src": "derived:intersects(chat_channels)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     },
     "deployment": {
      "value": "self_hosted",
@@ -4747,13 +4747,13 @@
      "value": 0,
      "conf": 1.0,
      "src": "derived:usd_per_month(software_cost)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     },
     "native_provider_count": {
      "value": 4,
      "conf": 1.0,
      "src": "derived:len(native_providers)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     }
    },
    "flags": [
@@ -4892,7 +4892,7 @@
      "value": true,
      "conf": 1.0,
      "src": "derived:intersects(chat_channels)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     },
     "deployment": {
      "value": "self_hosted",
@@ -4976,13 +4976,13 @@
      "value": 5,
      "conf": 1.0,
      "src": "derived:len(native_providers)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     },
     "self_updating_memory": {
      "value": true,
      "conf": 1.0,
      "src": "derived:intersects(memory_writer)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     },
     "software_cost": {
      "value": {
@@ -5026,7 +5026,7 @@
      "value": 0,
      "conf": 1.0,
      "src": "derived:usd_per_month(software_cost)",
-     "ts": "2026-10-23T21:45:59-05:00"
+     "ts": "2026-10-24T10:05:42-05:00"
     }
    },
    "flags": [

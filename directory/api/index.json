@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-23T22:59:12-05:00",
+ "updated": "2026-10-26T10:18:22-05:00",
  "types": [
   {
    "id": "crypto_jobs",
@@ -69,7 +69,7 @@
    "updated": "2026-10-23T09:23:37-05:00",
    "columns": 69,
    "review": 0,
-   "candidates": 42
+   "candidates": 0
   },
   {
    "id": "launchpads",
@@ -111,7 +111,7 @@
    "updated": "2026-10-23T09:23:38-05:00",
    "columns": 10,
    "review": 0,
-   "candidates": 13
+   "candidates": 0
   },
   {
    "id": "payment_rails",
