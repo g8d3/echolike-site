@@ -1,6 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /private/
-Disallow: /es/private/
-Disallow: /directory/api/
-Sitemap: https://echolike.app/sitemap.xml
