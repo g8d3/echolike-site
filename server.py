@@ -141,13 +141,16 @@ class DB:
         except OSError:
             pass
 
-    def store(self, device, items, ua="", ip=""):
+    def store(self, device, items, ua="", ip="", post_ms=None):
         got = []
         for it in items:
             if not isinstance(it, dict):
                 continue
             iid = str(it.get("id") or secrets.token_hex(12))
             kind = str(it.get("kind", ""))
+            # how long the client's POST took to come back (the number its toast shows)
+            if post_ms is not None and "post_ms" not in it:
+                it["post_ms"] = post_ms
             try:
                 self.c.execute(
                     "INSERT OR IGNORE INTO likes (id, device, kind, handle, url, text, nota, clicked_at, recv_at, raw, ua, ip) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
@@ -275,8 +278,10 @@ def make_handler(db):
                 return self._json({"ok": False, "error": "items must be a list"}, 400)
             if not db.check_cap(dev, len(items)):
                 return self._json({"ok": False, "error": "daily cap"}, 429)
+            post_ms = body.get("post_ms") if isinstance(body.get("post_ms"), (int, float)) else None
             return self._json({"ok": True, "received": db.store(dev, items, self.headers.get("user-agent") or "",
-                                                                self.headers.get("x-forwarded-for") or self.client_address[0])})
+                                                                self.headers.get("x-forwarded-for") or self.client_address[0],
+                                                                post_ms)})
 
     return H
 
