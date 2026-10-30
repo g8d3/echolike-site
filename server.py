@@ -26,6 +26,37 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import urlparse, parse_qs
 
 DAILY_CAP = 2000
+MAX_DEVICES = int(os.environ.get("ECHO_MAX_DEVICES", "10"))
+OPEN_CLAIM = os.environ.get("ECHO_OPEN_CLAIM") == "1"
+CLAIM_PER_IP_HOUR = int(os.environ.get("ECHO_CLAIM_PER_HOUR", "3"))
+
+
+def is_private(ip):
+    """LAN, Tailscale and loopback: places where getting in already means trust."""
+    try:
+        a, b = [int(x) for x in ip.split(".")[:2]]
+    except Exception:
+        return ip in ("::1", "localhost") or ip.startswith("100.") or ip.startswith("fd")
+    return (a == 127 or a == 10 or (a == 192 and b == 168) or (a == 172 and 16 <= b <= 31)
+            or (a == 100 and 64 <= b <= 127))
+
+
+class _Rate:   # claims per address, so one client cannot fill the device table
+    def __init__(self):
+        self.hits = {}
+
+    def blocked(self, ip):
+        import time as _t
+        now = _t.time()
+        self.hits = {k: [t for t in v if now - t < 3600] for k, v in self.hits.items()}
+        return len(self.hits.get(ip, [])) >= CLAIM_PER_IP_HOUR
+
+    def hit(self, ip):
+        import time as _t
+        self.hits.setdefault(ip, []).append(_t.time())
+
+
+RATE = _Rate()
 KINDS = {"like", "bookmark", "unlike", "unbookmark", "note", "nota_texto", "nota_voz"}
 
 
@@ -42,6 +73,11 @@ class DB:
         self.c = sqlite3.connect(path, check_same_thread=False)
         self.c.execute("CREATE TABLE IF NOT EXISTS devices (id TEXT PRIMARY KEY, token_hash TEXT NOT NULL, revoked INTEGER NOT NULL DEFAULT 0)")
         self.c.execute("CREATE TABLE IF NOT EXISTS likes (id TEXT PRIMARY KEY, device TEXT NOT NULL, kind TEXT, handle TEXT, url TEXT, text TEXT, nota TEXT, clicked_at TEXT, recv_at TEXT, raw TEXT)")
+        # Which phone/PC sent it: without this, two devices with the same token are one blur (added 2026-10-29).
+        cols = {r[1] for r in self.c.execute("PRAGMA table_info(likes)")}
+        for c, t in (("ua", "TEXT"), ("ip", "TEXT")):
+            if c not in cols:
+                self.c.execute(f"ALTER TABLE likes ADD COLUMN {c} {t}")
         self.c.execute("CREATE TABLE IF NOT EXISTS daily (device TEXT NOT NULL, day TEXT NOT NULL, n INTEGER NOT NULL DEFAULT 0, PRIMARY KEY (device, day))")
         self.c.commit()
 
@@ -51,6 +87,23 @@ class DB:
         want = sha(token)
         row = self.c.execute("SELECT id FROM devices WHERE token_hash=? AND revoked=0", (want,)).fetchone()
         return row[0] if row else None
+
+    def claim(self, ip, ua, max_devices):
+        """Mint a device token for a new client. Returns the token once, or None."""
+        n = self.c.execute("SELECT COUNT(*) FROM devices WHERE revoked=0").fetchone()[0]
+        if n >= max_devices:
+            return None
+        tok = "dt_" + secrets.token_urlsafe(32)
+        dev = "dev-" + secrets.token_hex(4)
+        self.c.execute("INSERT INTO devices (id, token_hash) VALUES (?, ?)", (dev, sha(tok)))
+        self.c.commit()
+        self.c.execute("CREATE TABLE IF NOT EXISTS claims (at TEXT, ip TEXT, device TEXT, ua TEXT)")
+        self.c.execute("INSERT INTO claims (at, ip, device, ua) VALUES (?,?,?,?)", (utcnow(), ip, dev, str(ua or "")[:300]))
+        self.c.commit()
+        return tok
+
+    def device_count(self):
+        return self.c.execute("SELECT COUNT(*) FROM devices WHERE revoked=0").fetchone()[0]
 
     def ensure_first_device(self):
         row = self.c.execute("SELECT id FROM devices LIMIT 1").fetchone()
@@ -71,24 +124,26 @@ class DB:
         self.c.commit()
         return True
 
-    def store(self, device, items):
-        n = 0
+    def store(self, device, items, ua="", ip=""):
+        got = []
         for it in items:
             if not isinstance(it, dict):
                 continue
             iid = str(it.get("id") or secrets.token_hex(12))
+            kind = str(it.get("kind", ""))
             try:
                 self.c.execute(
-                    "INSERT OR IGNORE INTO likes (id, device, kind, handle, url, text, nota, clicked_at, recv_at, raw) VALUES (?,?,?,?,?,?,?,?,?,?)",
-                    (iid, device, str(it.get("kind", "")), str(it.get("handle", "") or ""), str(it.get("url", "") or ""),
+                    "INSERT OR IGNORE INTO likes (id, device, kind, handle, url, text, nota, clicked_at, recv_at, raw, ua, ip) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
+                    (iid, device, kind, str(it.get("handle", "") or ""), str(it.get("url", "") or ""),
                      str(it.get("text", "") or "")[:4000], str(it.get("nota", "") or "")[:4000],
-                     str(it.get("clicked_at", "") or ""), utcnow(), json.dumps(it)[:8000]),
+                     str(it.get("clicked_at", "") or ""), utcnow(), json.dumps(it)[:8000],
+                     str(ua or "")[:300], str(ip or "")[:60]),
                 )
-                n += self.c.total_changes and 1 or 0
+                got.append({"id": iid, "kind": kind})
             except sqlite3.Error:
                 pass
         self.c.commit()
-        return n
+        return got
 
     def latest(self, limit=50):
         rows = self.c.execute("SELECT id, kind, handle, url, text, nota, clicked_at, recv_at FROM likes ORDER BY recv_at DESC LIMIT ?", (limit,)).fetchall()
@@ -115,10 +170,29 @@ def make_handler(db):
             tok = auth[7:].strip() if auth.lower().startswith("bearer ") else ""
             return db.device_id(tok)
 
+        def _claim(self):
+            """POST /api/claim — no token needed: the network is the credential.
+
+            Allowed from private addresses (LAN, Tailscale, loopback) by default;
+            a public server needs --open-claim. Capped and logged either way."""
+            ip = (self.headers.get("x-forwarded-for") or self.client_address[0] or "").split(",")[0].strip()
+            if not (OPEN_CLAIM or is_private(ip)):
+                return self._json({"ok": False, "error": "claim only from a private network",
+                                   "hint": "run the server with --open-claim to allow public claims"}, 403)
+            if RATE.blocked(ip):
+                return self._json({"ok": False, "error": "too many claims from this address"}, 429)
+            tok = db.claim(ip, self.headers.get("user-agent"), MAX_DEVICES)
+            if not tok:
+                return self._json({"ok": False, "error": f"device limit reached ({MAX_DEVICES})"}, 409)
+            RATE.hit(ip)
+            return self._json({"ok": True, "device_token": tok, "devices": db.device_count()})
+
         def do_GET(self):
             u = urlparse(self.path)
             if u.path == "/api/health":
-                return self._json({"ok": True, "time": utcnow()})
+                return self._json({"ok": True, "time": utcnow(), "api": 2,
+                                   "claim": "open" if OPEN_CLAIM else "private",
+                                   "devices": db.device_count()})
             if u.path == "/api/inbox":
                 dev = self._auth()
                 if not dev:
@@ -158,6 +232,8 @@ def make_handler(db):
 
         def do_POST(self):
             u = urlparse(self.path)
+            if u.path == "/api/claim":
+                return self._claim()
             if u.path != "/api/likes":
                 return self._json({"ok": False, "error": "not found"}, 404)
             dev = self._auth()
@@ -178,7 +254,8 @@ def make_handler(db):
                 return self._json({"ok": False, "error": "items must be a list"}, 400)
             if not db.check_cap(dev, len(items)):
                 return self._json({"ok": False, "error": "daily cap"}, 429)
-            return self._json({"ok": True, "received": db.store(dev, items)})
+            return self._json({"ok": True, "received": db.store(dev, items, self.headers.get("user-agent") or "",
+                                                                self.headers.get("x-forwarded-for") or self.client_address[0])})
 
     return H
 
@@ -188,7 +265,10 @@ def main(argv=None):
     ap.add_argument("--host", default="127.0.0.1")
     ap.add_argument("--port", type=int, default=8911)
     ap.add_argument("--dir", default=os.path.expanduser("~/.echolike-inbox"))
+    ap.add_argument("--open-claim", action="store_true", help="allow POST /api/claim from public addresses")
     a = ap.parse_args(argv)
+    global OPEN_CLAIM
+    OPEN_CLAIM = OPEN_CLAIM or a.open_claim
     os.makedirs(a.dir, exist_ok=True)
     db = DB(os.path.join(a.dir, "inbox.db"))
     fresh = db.ensure_first_device()
