@@ -39,6 +39,7 @@ MAX_DEVICES = int(os.environ.get("ECHO_MAX_DEVICES", "10"))
 # shows them before writing (see /api/health prices). Charging comes later.
 PRICE_LIKE_IN = int(os.environ.get("ECHO_PRICE_LIKE_IN", "1"))
 PRICE_READ = int(os.environ.get("ECHO_PRICE_READ", "0"))
+PRICE_ANALYSIS = int(os.environ.get("ECHO_PRICE_ANALYSIS", "5"))
 FREE_DAILY = int(os.environ.get("ECHO_FREE_DAILY", "2000"))
 ENFORCE_QUOTA = os.environ.get("ECHO_ENFORCE_QUOTA") == "1"
 # The producer knows when a row is durable, so it tells the analysis pipeline instead of
@@ -112,6 +113,10 @@ class DB:
         # Pipeline handoffs: likes per user handed to the analysis pipeline (the
         # real inference cost driver). Written by operador/inbox_a_pipeline.py.
         self.c.execute("CREATE TABLE IF NOT EXISTS pipeline (day TEXT NOT NULL, user_id TEXT NOT NULL, handoff_likes INTEGER NOT NULL DEFAULT 0, handoff_runs INTEGER NOT NULL DEFAULT 0, PRIMARY KEY (day, user_id))")
+        # Inference ledger: actual AI spend per user, recorded by likes_loop.py
+        # after each muse call (calls, wall seconds, output chars). The cash
+        # register counts first (handoff), this counts what was really spent.
+        self.c.execute("CREATE TABLE IF NOT EXISTS inference (day TEXT NOT NULL, user_id TEXT NOT NULL, calls INTEGER NOT NULL DEFAULT 0, seconds_ms INTEGER NOT NULL DEFAULT 0, chars INTEGER NOT NULL DEFAULT 0, PRIMARY KEY (day, user_id))")
         self.c.commit()
         self._ensure_users()
 
@@ -202,15 +207,19 @@ class DB:
         likes_total = self.c.execute("SELECT COUNT(*) FROM likes WHERE device IN (SELECT id FROM devices WHERE user_id=?)",
                                      (user_id,)).fetchone()[0]
         tin, trd = (row[0] if row else 0), (row[1] if row else 0)
+        inf = self.get_inference(user_id)
+        ctoday = tin * PRICE_LIKE_IN + trd * PRICE_READ + inf["today"]["calls"] * PRICE_ANALYSIS
+        ctotal = t[0] * PRICE_LIKE_IN + t[1] * PRICE_READ + inf["total"]["calls"] * PRICE_ANALYSIS
         return {"user_id": user_id, "day": day,
                 "today": {"likes_in": tin, "inbox_reads": trd},
                 "total": {"likes_in": t[0], "inbox_reads": t[1], "likes_stored": likes_total},
-                "credits": {"today": tin * PRICE_LIKE_IN + trd * PRICE_READ,
-                              "total": t[0] * PRICE_LIKE_IN + t[1] * PRICE_READ,
-                              "prices": {"inbox_write": PRICE_LIKE_IN, "inbox_read": PRICE_READ}},
-                "quota": {"free_daily": FREE_DAILY, "used_today": tin,
-                            "left_today": max(0, FREE_DAILY - tin), "enforcing": ENFORCE_QUOTA},
-                "pipeline": self.get_pipeline(user_id)}
+                "credits": {"today": ctoday, "total": ctotal,
+                              "prices": {"inbox_write": PRICE_LIKE_IN, "inbox_read": PRICE_READ,
+                                         "analysis_call": PRICE_ANALYSIS}},
+                "quota": {"free_daily": FREE_DAILY, "used_today": ctoday,
+                            "left_today": max(0, FREE_DAILY - ctoday), "enforcing": ENFORCE_QUOTA},
+                "pipeline": self.get_pipeline(user_id),
+                "inference": self.get_inference(user_id)}
 
     def bump_pipeline(self, user_id, likes_n):
         """One pipeline handoff: the analyser will spend inference on these likes."""
@@ -229,6 +238,29 @@ class DB:
         t = self.c.execute("SELECT COALESCE(SUM(handoff_likes),0), COALESCE(SUM(handoff_runs),0) FROM pipeline WHERE user_id=?", (user_id,)).fetchone()
         return {"today": {"handoff_likes": row[0] if row else 0, "handoff_runs": row[1] if row else 0},
                 "total": {"handoff_likes": t[0], "handoff_runs": t[1]}}
+
+    def bump_inference(self, user_id, seconds=0.0, chars=0):
+        """One finished muse call for this user. Best-effort: never raises."""
+        try:
+            ms = int(round(float(seconds) * 1000))
+            self.c.execute("INSERT INTO inference (day, user_id, calls, seconds_ms, chars) VALUES (?,?,1,?,?) "
+                           "ON CONFLICT (day, user_id) DO UPDATE SET calls = calls + 1, "
+                           "seconds_ms = seconds_ms + excluded.seconds_ms, chars = chars + excluded.chars",
+                           (today(), user_id, ms, int(chars)))
+            self.c.commit()
+        except (sqlite3.Error, ValueError, TypeError):
+            pass
+
+    def get_inference(self, user_id):
+        day = today()
+        try:
+            row = self.c.execute("SELECT calls, seconds_ms, chars FROM inference WHERE day=? AND user_id=?", (day, user_id)).fetchone()
+            t = self.c.execute("SELECT COALESCE(SUM(calls),0), COALESCE(SUM(seconds_ms),0), COALESCE(SUM(chars),0) FROM inference WHERE user_id=?", (user_id,)).fetchone()
+        except sqlite3.Error:
+            return {"today": {"calls": 0, "seconds": 0.0, "chars": 0},
+                    "total": {"calls": 0, "seconds": 0.0, "chars": 0}}
+        return {"today": {"calls": row[0] if row else 0, "seconds": round((row[1] if row else 0) / 1000.0, 2), "chars": row[2] if row else 0},
+                "total": {"calls": t[0], "seconds": round(t[1] / 1000.0, 2), "chars": t[2]}}
 
     def quota_left(self, user_id):
         """Billable units the user may still store today. Infinite when not enforcing."""
@@ -344,6 +376,7 @@ def make_handler(db):
                                    "devices": db.device_count(), "users": db.user_count(),
                                    "multi_tenant": True,
                                    "prices": {"inbox_write": PRICE_LIKE_IN, "inbox_read": PRICE_READ,
+                                               "analysis_call": PRICE_ANALYSIS,
                                                "free_daily": FREE_DAILY, "enforcing": ENFORCE_QUOTA}})
             if u.path == "/api/me":
                 dev, uid = self._identity()

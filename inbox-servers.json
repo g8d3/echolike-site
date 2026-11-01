@@ -1,0 +1,34 @@
+{
+  "v": 1,
+  "updated": "2026-11-01T02:12:38Z",
+  "note": "Directory MIRROR seed (discovery only, never trust). Canonical URL https://echolike.app/inbox-servers.json ships only with an approved site publish. Values below measured from the live server 2026-11-01, not assumed. Clients probe every entry and rank by measured latency; a dead server is dropped, never kept.",
+  "servers": [
+    {
+      "id": "local-pc",
+      "name": "This PC (same machine)",
+      "url": "http://127.0.0.1:8911",
+      "api": 2,
+      "price": { "model": "free", "quota_day": 2000, "unit": "inbox_write", "enforcing": false },
+      "region": "local",
+      "claim": "private",
+      "health": "/api/health",
+      "measured": { "at": "2026-11-01T02:12:38Z", "devices": 1, "users": 1, "multi_tenant": true },
+      "notes": "same-machine default: the extension tries this first, no paste needed"
+    }
+  ],
+  "paid_shape": {
+    "live": false,
+    "note": "Template for a future paid entry. Not probed, not ranked. A paid entry goes live only with operator, price, pay rail and pubkey filled, and passes validate_directory.py.",
+    "example": {
+      "id": "inbox-eu-1",
+      "name": "Inbox EU (paid)",
+      "url": "https://inbox-eu-1.example",
+      "api": 2,
+      "price": { "model": "paid", "usd_month": 2, "pay": "lightning" },
+      "region": "eu-west",
+      "claim": "open",
+      "health": "/api/health",
+      "pubkey": "ed25519:..."
+    }
+  }
+}
