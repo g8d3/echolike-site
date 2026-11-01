@@ -3,6 +3,11 @@
 (POST /api/likes, GET /api/inbox, GET /api/health), con SQLite en vez de D1.
 Sin dependencias: solo Python 3 stdlib.
 
+Multi-tenant (v1): cada claim crea un usuario nuevo (u_xxx) con su dispositivo
+(dev-xxx). El device claim ES la identidad de usuario: la DB queda namespaced
+por usuario y /api/inbox solo devuelve lo de tu usuario. El dato viejo
+(pc-1) pertenece a u_owner: sin cambio de comportamiento para el owner.
+
 Uso:
   python3 server.py                 # escucha en 127.0.0.1:8911 (solo este aparato)
   python3 server.py --host 0.0.0.0  # también visible en tu LAN / Tailscale (pide token igual)
@@ -29,12 +34,20 @@ from urllib.parse import urlparse, parse_qs
 
 DAILY_CAP = 2000
 MAX_DEVICES = int(os.environ.get("ECHO_MAX_DEVICES", "10"))
+# Pricing (demo mode): the meter prices every action, but nothing is enforced
+# until ECHO_ENFORCE_QUOTA=1. Prices are integer credit-units; the extension
+# shows them before writing (see /api/health prices). Charging comes later.
+PRICE_LIKE_IN = int(os.environ.get("ECHO_PRICE_LIKE_IN", "1"))
+PRICE_READ = int(os.environ.get("ECHO_PRICE_READ", "0"))
+FREE_DAILY = int(os.environ.get("ECHO_FREE_DAILY", "2000"))
+ENFORCE_QUOTA = os.environ.get("ECHO_ENFORCE_QUOTA") == "1"
 # The producer knows when a row is durable, so it tells the analysis pipeline instead of
 # a file watcher guessing: the kernel event can arrive before sqlite commits.
 INGEST_CMD = os.environ.get("ECHO_INGEST_CMD",
                             os.path.expanduser("~/code/p4/e092-echolike/operador/inbox_a_pipeline.py"))
 OPEN_CLAIM = os.environ.get("ECHO_OPEN_CLAIM") == "1"
 CLAIM_PER_IP_HOUR = int(os.environ.get("ECHO_CLAIM_PER_HOUR", "3"))
+OWNER_USER = "u_owner"
 
 
 def is_private(ip):
@@ -74,9 +87,14 @@ def utcnow():
     return datetime.now(timezone.utc).isoformat()
 
 
+def today():
+    return datetime.now(timezone.utc).strftime("%Y-%m-%d")
+
+
 class DB:
     def __init__(self, path):
         self.c = sqlite3.connect(path, check_same_thread=False)
+        self.c.execute("CREATE TABLE IF NOT EXISTS users (id TEXT PRIMARY KEY, created_at TEXT NOT NULL DEFAULT '')")
         self.c.execute("CREATE TABLE IF NOT EXISTS devices (id TEXT PRIMARY KEY, token_hash TEXT NOT NULL, revoked INTEGER NOT NULL DEFAULT 0)")
         self.c.execute("CREATE TABLE IF NOT EXISTS likes (id TEXT PRIMARY KEY, device TEXT NOT NULL, kind TEXT, handle TEXT, url TEXT, text TEXT, nota TEXT, clicked_at TEXT, recv_at TEXT, raw TEXT)")
         # Which phone/PC sent it: without this, two devices with the same token are one blur (added 2026-10-29).
@@ -84,8 +102,35 @@ class DB:
         for c, t in (("ua", "TEXT"), ("ip", "TEXT")):
             if c not in cols:
                 self.c.execute(f"ALTER TABLE likes ADD COLUMN {c} {t}")
+        dcols = {r[1] for r in self.c.execute("PRAGMA table_info(devices)")}
+        if "user_id" not in dcols:
+            self.c.execute("ALTER TABLE devices ADD COLUMN user_id TEXT")
         self.c.execute("CREATE TABLE IF NOT EXISTS daily (device TEXT NOT NULL, day TEXT NOT NULL, n INTEGER NOT NULL DEFAULT 0, PRIMARY KEY (device, day))")
+        self.c.execute("CREATE TABLE IF NOT EXISTS claims (at TEXT, ip TEXT, device TEXT, ua TEXT)")
+        # Credit meter (v1: counts only, charging comes later). One row per user per day.
+        self.c.execute("CREATE TABLE IF NOT EXISTS usage (day TEXT NOT NULL, user_id TEXT NOT NULL, likes_in INTEGER NOT NULL DEFAULT 0, inbox_reads INTEGER NOT NULL DEFAULT 0, PRIMARY KEY (day, user_id))")
+        # Pipeline handoffs: likes per user handed to the analysis pipeline (the
+        # real inference cost driver). Written by operador/inbox_a_pipeline.py.
+        self.c.execute("CREATE TABLE IF NOT EXISTS pipeline (day TEXT NOT NULL, user_id TEXT NOT NULL, handoff_likes INTEGER NOT NULL DEFAULT 0, handoff_runs INTEGER NOT NULL DEFAULT 0, PRIMARY KEY (day, user_id))")
         self.c.commit()
+        self._ensure_users()
+
+    def _ensure_users(self):
+        """Backfill: every device without owner belongs to u_owner. Idempotent."""
+        self.c.execute("INSERT OR IGNORE INTO users (id, created_at) VALUES (?, ?)", (OWNER_USER, utcnow()))
+        self.c.execute("UPDATE devices SET user_id=? WHERE user_id IS NULL OR user_id=''", (OWNER_USER,))
+        self.c.commit()
+
+    def user_of_device(self, device):
+        row = self.c.execute("SELECT user_id FROM devices WHERE id=? AND revoked=0", (device,)).fetchone()
+        return row[0] if row and row[0] else OWNER_USER
+
+    def devices_of_user(self, user_id):
+        return [r[0] for r in self.c.execute("SELECT id FROM devices WHERE user_id=? AND revoked=0", (user_id,))]
+
+    def user_of_token(self, token):
+        dev = self.device_id(token)
+        return (dev, self.user_of_device(dev)) if dev else (None, None)
 
     def device_id(self, token):
         if not token:
@@ -95,33 +140,43 @@ class DB:
         return row[0] if row else None
 
     def claim(self, ip, ua, max_devices):
-        """Mint a device token for a new client. Returns the token once, or None."""
+        """Mint a device token for a NEW user. Returns (token, user_id) once, or (None, None).
+
+        v1 rule: one claim = one user namespace. Linking a second device to the
+        same user is a later /api/link call; until then every newcomer is
+        isolated by construction and the owner flow is untouched."""
         n = self.c.execute("SELECT COUNT(*) FROM devices WHERE revoked=0").fetchone()[0]
         if n >= max_devices:
-            return None
+            return None, None
         tok = "dt_" + secrets.token_urlsafe(32)
         dev = "dev-" + secrets.token_hex(4)
-        self.c.execute("INSERT INTO devices (id, token_hash) VALUES (?, ?)", (dev, sha(tok)))
+        uid = "u_" + secrets.token_hex(4)
+        self.c.execute("INSERT OR IGNORE INTO users (id, created_at) VALUES (?, ?)", (uid, utcnow()))
+        self.c.execute("INSERT INTO devices (id, token_hash, user_id) VALUES (?, ?, ?)", (dev, sha(tok), uid))
         self.c.commit()
-        self.c.execute("CREATE TABLE IF NOT EXISTS claims (at TEXT, ip TEXT, device TEXT, ua TEXT)")
         self.c.execute("INSERT INTO claims (at, ip, device, ua) VALUES (?,?,?,?)", (utcnow(), ip, dev, str(ua or "")[:300]))
         self.c.commit()
-        return tok
+        return tok, uid
 
     def device_count(self):
         return self.c.execute("SELECT COUNT(*) FROM devices WHERE revoked=0").fetchone()[0]
 
+    def user_count(self):
+        return self.c.execute("SELECT COUNT(*) FROM users").fetchone()[0]
+
     def ensure_first_device(self):
         row = self.c.execute("SELECT id FROM devices LIMIT 1").fetchone()
         if row:
+            self._ensure_users()
             return None
         token = "dt_" + secrets.token_urlsafe(32)
-        self.c.execute("INSERT INTO devices (id, token_hash) VALUES (?, ?)", ("pc-1", sha(token)))
+        self.c.execute("INSERT OR IGNORE INTO users (id, created_at) VALUES (?, ?)", (OWNER_USER, utcnow()))
+        self.c.execute("INSERT INTO devices (id, token_hash, user_id) VALUES (?, ?, ?)", ("pc-1", sha(token), OWNER_USER))
         self.c.commit()
         return token
 
     def check_cap(self, device, n):
-        day = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+        day = today()
         row = self.c.execute("SELECT n FROM daily WHERE device=? AND day=?", (device, day)).fetchone()
         used = row[0] if row else 0
         if used + n > DAILY_CAP:
@@ -129,6 +184,58 @@ class DB:
         self.c.execute("INSERT INTO daily (device, day, n) VALUES (?,?,?) ON CONFLICT (device, day) DO UPDATE SET n = daily.n + excluded.n", (device, day, n))
         self.c.commit()
         return True
+
+    def bump_usage(self, user_id, likes_in=0, inbox_reads=0):
+        try:
+            self.c.execute("INSERT INTO usage (day, user_id, likes_in, inbox_reads) VALUES (?,?,?,?) "
+                           "ON CONFLICT (day, user_id) DO UPDATE SET likes_in = likes_in + excluded.likes_in, "
+                           "inbox_reads = inbox_reads + excluded.inbox_reads",
+                           (today(), user_id, likes_in, inbox_reads))
+            self.c.commit()
+        except sqlite3.Error:
+            pass
+
+    def get_usage(self, user_id):
+        day = today()
+        row = self.c.execute("SELECT likes_in, inbox_reads FROM usage WHERE day=? AND user_id=?", (day, user_id)).fetchone()
+        t = self.c.execute("SELECT COALESCE(SUM(likes_in),0), COALESCE(SUM(inbox_reads),0) FROM usage WHERE user_id=?", (user_id,)).fetchone()
+        likes_total = self.c.execute("SELECT COUNT(*) FROM likes WHERE device IN (SELECT id FROM devices WHERE user_id=?)",
+                                     (user_id,)).fetchone()[0]
+        tin, trd = (row[0] if row else 0), (row[1] if row else 0)
+        return {"user_id": user_id, "day": day,
+                "today": {"likes_in": tin, "inbox_reads": trd},
+                "total": {"likes_in": t[0], "inbox_reads": t[1], "likes_stored": likes_total},
+                "credits": {"today": tin * PRICE_LIKE_IN + trd * PRICE_READ,
+                              "total": t[0] * PRICE_LIKE_IN + t[1] * PRICE_READ,
+                              "prices": {"inbox_write": PRICE_LIKE_IN, "inbox_read": PRICE_READ}},
+                "quota": {"free_daily": FREE_DAILY, "used_today": tin,
+                            "left_today": max(0, FREE_DAILY - tin), "enforcing": ENFORCE_QUOTA},
+                "pipeline": self.get_pipeline(user_id)}
+
+    def bump_pipeline(self, user_id, likes_n):
+        """One pipeline handoff: the analyser will spend inference on these likes."""
+        try:
+            self.c.execute("INSERT INTO pipeline (day, user_id, handoff_likes, handoff_runs) VALUES (?,?,?,1) "
+                           "ON CONFLICT (day, user_id) DO UPDATE SET handoff_likes = handoff_likes + excluded.handoff_likes, "
+                           "handoff_runs = handoff_runs + 1",
+                           (today(), user_id, likes_n))
+            self.c.commit()
+        except sqlite3.Error:
+            pass
+
+    def get_pipeline(self, user_id):
+        day = today()
+        row = self.c.execute("SELECT handoff_likes, handoff_runs FROM pipeline WHERE day=? AND user_id=?", (day, user_id)).fetchone()
+        t = self.c.execute("SELECT COALESCE(SUM(handoff_likes),0), COALESCE(SUM(handoff_runs),0) FROM pipeline WHERE user_id=?", (user_id,)).fetchone()
+        return {"today": {"handoff_likes": row[0] if row else 0, "handoff_runs": row[1] if row else 0},
+                "total": {"handoff_likes": t[0], "handoff_runs": t[1]}}
+
+    def quota_left(self, user_id):
+        """Billable units the user may still store today. Infinite when not enforcing."""
+        if not ENFORCE_QUOTA:
+            return None
+        row = self.c.execute("SELECT likes_in FROM usage WHERE day=? AND user_id=?", (today(), user_id)).fetchone()
+        return max(0, FREE_DAILY - (row[0] if row else 0))
 
     def notify_pipeline(self):
         """Fire-and-forget: the ingest script is idempotent, so a double call is harmless."""
@@ -164,11 +271,17 @@ class DB:
                 pass
         self.c.commit()
         if got:
+            self.bump_usage(self.user_of_device(device), likes_in=len(got))
             self.notify_pipeline()
         return got
 
-    def latest(self, limit=50):
-        rows = self.c.execute("SELECT id, kind, handle, url, text, nota, clicked_at, recv_at FROM likes ORDER BY recv_at DESC LIMIT ?", (limit,)).fetchall()
+    def latest(self, user_id, limit=50):
+        devs = self.devices_of_user(user_id)
+        if not devs:
+            return []
+        marks = ",".join("?" * len(devs))
+        rows = self.c.execute(f"SELECT id, kind, handle, url, text, nota, clicked_at, recv_at FROM likes WHERE device IN ({marks}) ORDER BY recv_at DESC LIMIT ?",
+                              (*devs, limit)).fetchall()
         return [{"id": r[0], "kind": r[1], "handle": r[2], "url": r[3], "text": r[4], "nota": r[5], "clicked_at": r[6], "recv_at": r[7]} for r in rows]
 
 
@@ -192,22 +305,34 @@ def make_handler(db):
             tok = auth[7:].strip() if auth.lower().startswith("bearer ") else ""
             return db.device_id(tok)
 
+        def _identity(self):
+            auth = (self.headers.get("authorization") or "").strip()
+            tok = auth[7:].strip() if auth.lower().startswith("bearer ") else ""
+            if not tok:
+                # table page convenience: ?token= works like the header
+                try:
+                    tok = (parse_qs(urlparse(self.path).query).get("token") or [""])[0]
+                except Exception:
+                    tok = ""
+            return db.user_of_token(tok)
+
         def _claim(self):
             """POST /api/claim — no token needed: the network is the credential.
 
             Allowed from private addresses (LAN, Tailscale, loopback) by default;
-            a public server needs --open-claim. Capped and logged either way."""
+            a public server needs --open-claim. Capped and logged either way.
+            Each claim mints a fresh user namespace (device claim = identity)."""
             ip = (self.headers.get("x-forwarded-for") or self.client_address[0] or "").split(",")[0].strip()
             if not (OPEN_CLAIM or is_private(ip)):
                 return self._json({"ok": False, "error": "claim only from a private network",
                                    "hint": "run the server with --open-claim to allow public claims"}, 403)
             if RATE.blocked(ip):
                 return self._json({"ok": False, "error": "too many claims from this address"}, 429)
-            tok = db.claim(ip, self.headers.get("user-agent"), MAX_DEVICES)
+            tok, uid = db.claim(ip, self.headers.get("user-agent"), MAX_DEVICES)
             if not tok:
                 return self._json({"ok": False, "error": f"device limit reached ({MAX_DEVICES})"}, 409)
             RATE.hit(ip)
-            return self._json({"ok": True, "device_token": tok, "devices": db.device_count()})
+            return self._json({"ok": True, "device_token": tok, "user_id": uid, "devices": db.device_count()})
 
         def do_GET(self):
             u = urlparse(self.path)
@@ -216,9 +341,23 @@ def make_handler(db):
                 # guessing: the phones' clocks are ~300 ms off and that lands in every latency number.
                 return self._json({"ok": True, "time": utcnow(), "now_ms": int(_time.time() * 1000), "api": 2,
                                    "claim": "open" if OPEN_CLAIM else "private",
-                                   "devices": db.device_count()})
+                                   "devices": db.device_count(), "users": db.user_count(),
+                                   "multi_tenant": True,
+                                   "prices": {"inbox_write": PRICE_LIKE_IN, "inbox_read": PRICE_READ,
+                                               "free_daily": FREE_DAILY, "enforcing": ENFORCE_QUOTA}})
+            if u.path == "/api/me":
+                dev, uid = self._identity()
+                if not dev:
+                    return self._json({"ok": False, "error": "unauthorized"}, 401)
+                return self._json({"ok": True, "user_id": uid, "device": dev,
+                                   "devices": db.devices_of_user(uid)})
+            if u.path == "/api/usage":
+                dev, uid = self._identity()
+                if not dev:
+                    return self._json({"ok": False, "error": "unauthorized"}, 401)
+                return self._json({"ok": True, **db.get_usage(uid)})
             if u.path == "/api/inbox":
-                dev = self._auth()
+                dev, uid = self._identity()
                 if not dev:
                     return self._json({"ok": False, "error": "unauthorized"}, 401)
                 q = parse_qs(u.query)
@@ -226,13 +365,14 @@ def make_handler(db):
                     limit = max(1, min(200, int(q.get("limit", ["50"])[0])))
                 except ValueError:
                     limit = 50
-                return self._json({"ok": True, "items": db.latest(limit)})
+                db.bump_usage(uid, inbox_reads=1)
+                return self._json({"ok": True, "user_id": uid, "items": db.latest(uid, limit)})
             if u.path == "/" or u.path == "/index.html":
                 items = ""
                 try:
-                    dev = self._auth()
+                    dev, uid = self._identity()
                     if dev:
-                        for it in db.latest(30):
+                        for it in db.latest(uid, 30):
                             title = (it["text"] or it["nota"] or it["id"])[:120]
                             items += f"<li><b>{it['kind']}</b> @{it['handle'] or '?'} — {title}</li>"
                 except BrokenPipeError:
@@ -278,6 +418,11 @@ def make_handler(db):
                 return self._json({"ok": False, "error": "items must be a list"}, 400)
             if not db.check_cap(dev, len(items)):
                 return self._json({"ok": False, "error": "daily cap"}, 429)
+            left = db.quota_left(db.user_of_device(dev))
+            if left is not None and len(items) > left:
+                return self._json({"ok": False, "error": "quota_exceeded",
+                                   "hint": "free daily quota spent; demo-only, raise ECHO_FREE_DAILY or unset ECHO_ENFORCE_QUOTA",
+                                   "quota": {"free_daily": FREE_DAILY, "left_today": left}}, 429)
             post_ms = body.get("post_ms") if isinstance(body.get("post_ms"), (int, float)) else None
             return self._json({"ok": True, "received": db.store(dev, items, self.headers.get("user-agent") or "",
                                                                 self.headers.get("x-forwarded-for") or self.client_address[0],
