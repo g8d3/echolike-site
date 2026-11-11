@@ -17,7 +17,7 @@ import os
 import secrets
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
-HERE = os.path.dirname(os.path.abspath(__file__))
+HERE = os.getcwd()  # data lives in the folder you run it from, not next to the script
 TOKEN_FILE = os.path.join(HERE, ".token")
 LOG_FILE = os.path.join(HERE, "likes.jsonl")
 
