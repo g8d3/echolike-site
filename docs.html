@@ -22,12 +22,7 @@ footer{border-top:1px solid #e3e3e3;margin-top:2.5rem;padding-top:1rem;color:#55
 <h1>EchoLike Lite · Install guide</h1>
 <p><a href="/">← Back to download</a></p>
 
-<h2>1. Start your inbox</h2>
-<p>On your computer, <a href="/server.py">download server.py</a> and run it:</p>
-<pre>python3 server.py</pre>
-<p>It prints its address (for example <code>http://192.168.0.5:8931</code>). Keep that window open.</p>
-
-<h2>2. Load the extension</h2>
+<h2>1. Install the extension</h2>
 <ol>
 <li><a href="/echolike-lite.zip">Download the zip</a> and unzip it into a folder you keep.</li>
 <li>Open <code>chrome://extensions</code> (Edge: <code>edge://extensions</code>, Brave: <code>brave://extensions</code>).</li>
@@ -35,26 +30,30 @@ footer{border-top:1px solid #e3e3e3;margin-top:2.5rem;padding-top:1rem;color:#55
 </ol>
 <p class="mut">Firefox: <code>about:debugging#/runtime/this-firefox</code> → Load Temporary Add-on → pick <code>manifest.json</code> inside the folder (Firefox removes it when it closes).</p>
 
-<h2>3. Connect</h2>
-<ol>
-<li>Click the EchoLike icon and press <b>Find my inbox</b>. There is nothing to copy: the inbox on this computer issues the extension its own key.</li>
-<li><span class="mut">Inbox on another computer, or a hosted one? Open <b>Advanced</b> in the popup and type its address — it issues the key there too. A token is only needed when a hosted inbox handed you one.</span></li>
-<li>The popup says <b>✓ Connected</b>. Like or bookmark any post on X — a green toast confirms it was sent.</li>
-<li>Open the inbox address in your browser to see everything captured.</li>
-</ol>
+<h2>2. That is it — like a post on X</h2>
+<p>Your first like creates your own private inbox space on ours and the capture lands there. There is no address to type, no token to copy, no account to create. Free quota: <b>3000 captures a month</b>.</p>
+<p>Click the EchoLike icon to see the last 30 captures, or <b>Open my inbox</b> for the full list in your browser.</p>
+
+<h2>3. Optional: your own inbox</h2>
+<p>Nothing to configure, but if you want your likes only on your own machine, <a href="/server.py">download server.py</a> and run it:</p>
+<pre>python3 server.py</pre>
+<p>Then press <b>Find my inbox</b> in the popup: it prefers a server on this computer over the hosted one. You own <code>likes.jsonl</code>, nothing leaves your network.</p>
+
+<h2>What we can see</h2>
+<p>The hosted inbox stores your captures in plain text, so whoever runs it can read them. That is the honest state of it today; client-side encryption and self-hosting are the fix, in that order. Your likes are always mirrored in your own browser, so you can export them without asking us.</p>
 
 <h2>Ads</h2>
-<p>Promoted posts and promoted trends are hidden on X. The switch is in the extension popup: untick <b>Hide ads on X</b> to see them again. Liking an ad still works and is still captured — it just arrives marked as an ad, never silently dropped.</p>
+<p>Promoted posts and promoted trends are hidden on X. The switch is in the extension popup: untick <b>Hide ads on X</b> to see them again. Grok answers are never hidden by it. Liking an ad still works and is still captured — it just arrives marked as an ad, never silently dropped.</p>
 
 <h2>Phones and automatic updates</h2>
 <p>The zip never updates itself: a folder has nowhere to look for a new version. If you want the <b>Update</b> button on your browser's extensions page to work, install the packaged build instead: <a href="/echolike-lite.crx">echolike-lite.crx</a>. It carries this page's address as its update source, so Update downloads and installs new versions for you.</p>
-<p class="mut">Quetta (Android): open the .crx with the browser and confirm. If it answers <code>CRX_REQUIRED_PROOF_MISSING</code>, that browser no longer accepts packages from outside its store: use the zip and repeat steps 2–3 with each new zip.</p>
+<p class="mut">Quetta (Android): open the .crx with the browser and confirm. If it answers <code>CRX_REQUIRED_PROOF_MISSING</code>, that browser no longer accepts packages from outside its store: use the zip and repeat step 1 with each new zip.</p>
 
-<h2>Without an inbox</h2>
-<p>Captures are still saved in the browser: click the EchoLike icon and the popup lists the last 30 with a link to each post. Connect an inbox later — the waiting ones send when you press Save.</p>
+<h2>Without a connection</h2>
+<p>Captures are always saved in the browser first: click the EchoLike icon and the popup lists the last 30 with a link to each post. Anything that could not be sent waits there and goes out on the next like, on the next start, or with <b>Retry</b>. Nothing is lost.</p>
 
 <h2>What it does with your likes</h2>
-<p>The extension reads the posts you like or bookmark (author, text, link) and sends them to the inbox address you connected. Without an inbox everything stays in this browser. There is no EchoLike account. Remove the extension and it stops.</p>
+<p>The extension reads the posts you like or bookmark (author, text, link) and sends them to your inbox: the one on your own computer if you run it, the hosted one otherwise. Everything is kept in this browser as well, so the popup works with no connection. There is no EchoLike account. Remove the extension and it stops.</p>
 
 <h2>Why Chrome shows a developer-mode warning</h2>
 <p>EchoLike Lite is not in the Chrome Web Store: the store asks for identity verification. The notice appears for every extension installed this way, it is not a virus alert, and you can close it. The whole source is public, with no build step and no minified code.</p>
