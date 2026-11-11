@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EchoLike Lite · Install guide</title>
+<meta name="description" content="Install EchoLike Lite in three steps: start the inbox, load the extension, connect.">
+<style>
+body{font-family:system-ui,-apple-system,sans-serif;max-width:620px;margin:0 auto;padding:2.5rem 1.1rem 3rem;line-height:1.55;color:#111}
+h1{font-size:1.7rem;margin:0 0 .4rem}
+h2{font-size:1.1rem;margin:2rem 0 .5rem}
+p{margin:.6rem 0}
+p.mut,li.mut{color:#555;font-size:.92rem}
+ol,ul{text-align:left;padding-left:1.3rem}
+li{margin:.4rem 0}
+code{background:#f1f1f1;border-radius:4px;padding:1px 5px;font-size:.95em}
+pre{background:#f1f1f1;border-radius:8px;padding:12px;overflow-x:auto;font-size:.9em}
+footer{border-top:1px solid #e3e3e3;margin-top:2.5rem;padding-top:1rem;color:#555;font-size:.9rem}
+</style>
+</head>
+<body>
+<h1>EchoLike Lite · Install guide</h1>
+<p><a href="/">← Back to download</a></p>
+
+<h2>1. Start your inbox</h2>
+<p>On your computer, <a href="/server.py">download server.py</a> and run it:</p>
+<pre>python3 server.py</pre>
+<p>It prints an address (for example <code>http://192.168.0.5:8931</code>) and a token. Keep that window open.</p>
+
+<h2>2. Load the extension</h2>
+<ol>
+<li><a href="/echolike-lite.zip">Download the zip</a> and unzip it into a folder you keep.</li>
+<li>Open <code>chrome://extensions</code> (Edge: <code>edge://extensions</code>, Brave: <code>brave://extensions</code>).</li>
+<li>Turn on <b>Developer mode</b> (top right), click <b>Load unpacked</b>, pick the folder.</li>
+</ol>
+<p class="mut">Firefox: <code>about:debugging#/runtime/this-firefox</code> → Load Temporary Add-on → pick <code>manifest.json</code> inside the folder (Firefox removes it when it closes).</p>
+
+<h2>3. Connect</h2>
+<ol>
+<li>Click the EchoLike icon, paste the inbox address and the token, press <b>Save &amp; send</b>.</li>
+<li>The popup says <b>✓ Connected</b>. Like or bookmark any post on X — a green toast confirms it was sent.</li>
+<li>Open the inbox address in your browser to see everything captured.</li>
+</ol>
+
+<h2>Without an inbox</h2>
+<p>Captures are still saved in the browser (the popup shows the count). Connect later — the waiting ones send when you press Save.</p>
+
+<h2>What it does with your likes</h2>
+<p>The extension reads the posts you like or bookmark (author, text, link) and sends them to the inbox address you connected. Without an inbox everything stays in this browser. There is no EchoLike account. Remove the extension and it stops.</p>
+
+<h2>Why Chrome shows a developer-mode warning</h2>
+<p>EchoLike Lite is not in the Chrome Web Store: the store asks for identity verification. The notice appears for every extension installed this way, it is not a virus alert, and you can close it. The whole source is public, with no build step and no minified code.</p>
+
+<footer>
+<p>Questions: <a href="mailto:hello@echolike.app">hello@echolike.app</a> · <a href="/">Download page</a></p>
+</footer>
+</body>
+</html>

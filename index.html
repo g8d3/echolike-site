@@ -3,52 +3,26 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>EchoLike · Extension 2.20.1</title>
-<meta name="description" content="Free EchoLike extension for X: the posts you like or bookmark arrive in your own Telegram, saved and searchable. No account. Install in two minutes.">
+<title>EchoLike Lite</title>
+<meta name="description" content="EchoLike Lite: the X posts you like or bookmark are saved in your browser and sent to your inbox.">
 <style>
-body{font-family:system-ui,-apple-system,sans-serif;max-width:620px;margin:0 auto;padding:2.5rem 1.1rem 3rem;line-height:1.55;color:#111}
+body{font-family:system-ui,-apple-system,sans-serif;max-width:620px;margin:0 auto;padding:2.5rem 1.1rem 3rem;line-height:1.55;color:#111;text-align:center}
 h1{font-size:1.7rem;margin:0 0 .4rem}
-h2{font-size:1.1rem;margin:2rem 0 .5rem}
-p{margin:.6rem 0}
-a.btn{display:inline-block;margin:1.1rem 0 .5rem;padding:14px 28px;font-size:1.08rem;background:#111;color:#fff;text-decoration:none;border-radius:10px;font-weight:600}
 p.lead{font-size:1.05rem}
-p.mut,li.mut{color:#555;font-size:.92rem}
-ol,ul{text-align:left;padding-left:1.3rem}
-li{margin:.4rem 0}
-code{background:#f1f1f1;border-radius:4px;padding:1px 5px;font-size:.95em}
+a.btn{display:inline-block;margin:1.1rem 0 .5rem;padding:14px 28px;font-size:1.08rem;background:#111;color:#fff;text-decoration:none;border-radius:10px;font-weight:600}
+p.mut{color:#555;font-size:.92rem}
+p.docs{margin-top:2rem}
 footer{border-top:1px solid #e3e3e3;margin-top:2.5rem;padding-top:1rem;color:#555;font-size:.9rem}
 </style>
 </head>
 <body>
-<h1>EchoLike</h1>
-<p class="lead">The posts you like or bookmark on X arrive in your own Telegram, saved and searchable. Free, open source, no account.</p>
-<p><a class="btn" href="/extension_echolike.zip">Download 2.20.1</a></p>
-<p class="mut">Chrome, Edge, Brave and Firefox. Nothing is sent to us: your likes go to the bot you connect, and they travel encrypted.</p>
-
-<h2>Install, step by step</h2>
-<ol>
-<li>Download the zip and unzip it into a folder you keep (do not delete the folder later).</li>
-<li>Open <code>chrome://extensions</code> in Chrome, or <code>edge://extensions</code> in Edge, or <code>brave://extensions</code> in Brave.</li>
-<li>Turn on <b>Developer mode</b> with the switch in the top right.</li>
-<li>Click <b>Load unpacked</b> and pick the folder you unzipped.</li>
-<li>Click the EchoLike icon in the toolbar (pin it from the puzzle icon if it is not there) and open <b>Settings</b>.</li>
-<li>Under <b>Inbox connection</b>, paste the address of your inbox (for example <code>http://minipc.local:8911</code>) and press <b>Connect</b>: it claims a token by itself and the page says <b>Connected</b>.</li>
-<li>Turn on <b>Sync to my inbox</b>.</li>
-<li>Open or reload x.com and like a post. It shows up in your inbox within seconds.</li>
-</ol>
-
-<h2>Firefox</h2>
-<p>Open <code>about:debugging#/runtime/this-firefox</code>, click <b>Load Temporary Add-on</b> and pick the <b>manifest.json</b> inside the unzipped folder. Firefox removes temporary add-ons when it closes, so add it again after a restart.</p>
-
-<h2>Why Chrome shows a developer-mode warning</h2>
-<p>EchoLike is not in the Chrome Web Store on purpose: the store asks for identity verification. Chrome may show a "Disable developer mode extensions" notice. It appears for every extension installed this way, it is not a virus alert, and you can close it and keep EchoLike. The whole source is public, with no build step and no minified code.</p>
-
-<h2>What it does with your likes</h2>
-<p>The extension reads the posts you like or bookmark and sends them, with the author and the text, to the inbox address you connected. Without an inbox everything stays in this browser. There is no EchoLike account, so nobody else sees the list. Remove the extension and it stops.</p>
-
+<h1>EchoLike Lite</h1>
+<p class="lead">The X posts you like or bookmark are saved in your browser and sent to your inbox.</p>
+<p><a class="btn" href="/echolike-lite.zip">Download 1.0.0</a></p>
+<p class="mut">Chrome, Edge, Brave and Firefox. Nothing leaves your browser until you connect your inbox.</p>
+<p class="docs"><a href="/docs.html">Install guide &amp; documentation</a></p>
 <footer>
-<p>Questions: <a href="mailto:hello@echolike.app">hello@echolike.app</a> · The EchoLike bot: <a href="https://t.me/nova_radar_99_bot">@nova_radar_99_bot</a> · New posts and free alerts: <a href="https://t.me/echolike_radar">@echolike_radar</a> · <a href="https://github.com/g8d3/echolike-extension">Source code</a></p>
-<p class="mut">Not financial advice. Nothing here is investment advice.</p>
+<p>Questions: <a href="mailto:hello@echolike.app">hello@echolike.app</a></p>
 </footer>
 </body>
 </html>
