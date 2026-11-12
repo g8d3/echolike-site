@@ -137,11 +137,19 @@ class H(BaseHTTPRequestHandler):
     def log_message(self, *a):
         pass
 
+    def log_request(self, *a):
+        if os.environ.get("ECHO_LOG_REQUESTS"):
+            print("%s %s" % (self.command, self.path), flush=True)
+
     def _send(self, body, ctype, code=200):
         try:
             self.send_response(code)
             self.send_header("content-type", ctype)
             self.send_header("content-length", str(len(body)))
+            # The extension page reads this server from a chrome-extension:// origin.
+            self.send_header("access-control-allow-origin", "*")
+            self.send_header("access-control-allow-headers", "authorization, content-type, x-echolike-api")
+            self.send_header("access-control-allow-methods", "GET, POST, OPTIONS")
             self.end_headers()
             self.wfile.write(body)
         except (BrokenPipeError, ConnectionResetError):
@@ -150,8 +158,20 @@ class H(BaseHTTPRequestHandler):
     def _json(self, obj, code=200):
         self._send(json.dumps(obj).encode(), "application/json", code)
 
+    def _read_body(self):
+        """Consume the body exactly once, whatever the route does with it."""
+        if getattr(self, "_body", None) is None:
+            n = int(self.headers.get("content-length", "0") or 0)
+            self._body = self.rfile.read(max(n, 0)) if n else b""
+        return self._body
+
     def _safe(self, fn):
         try:
+            # One handler instance serves every request on a keep-alive connection:
+            # the cached body has to be dropped, or the next POST reads the previous
+            # request's (empty) body and silently stores nothing.
+            self._body = None
+            self._read_body()  # and a body left in the socket becomes the next request line
             fn()
         except (BrokenPipeError, ConnectionResetError):
             pass
@@ -212,8 +232,7 @@ class H(BaseHTTPRequestHandler):
         if not authorized(self.headers.get("authorization", "")):
             return self._json({"error": "unauthorized"}, 401)
         try:
-            n = int(self.headers.get("content-length", "0"))
-            items = json.loads(self.rfile.read(max(n, 0)) or b"{}").get("items", [])
+            items = json.loads(self._read_body() or b"{}").get("items", [])
         except (ValueError, OSError):
             return self._json({"error": "bad json"}, 400)
         if not isinstance(items, list):
@@ -258,11 +277,23 @@ class H(BaseHTTPRequestHandler):
             else self._json({"error": "not found"}, 404)
         )
 
+    def _telemetry(self):
+        """POST /api/telemetry — accepted so the client's queue drains, not stored here.
+        A self-hosted inbox has nothing to report to; the hosted one keeps it."""
+        self._read_body()
+        self._json({"ok": True, "stored": 0})
+
+    def do_OPTIONS(self):
+        # CORS preflight: answer it instead of letting http.server reply 501.
+        self._safe(lambda: self._send(b"", "text/plain", 204))
+
     def do_POST(self):
         path = self.path.split("?")[0]
         self._safe(
             lambda: self._likes()
             if path == "/api/likes"
+            else self._telemetry()
+            if path == "/api/telemetry"
             else self._claim()
             if path == "/api/claim"
             else self._json({"error": "not found"}, 404)
