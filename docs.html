@@ -47,6 +47,11 @@ footer{border-top:1px solid #e3e3e3;margin-top:2.5rem;padding-top:1rem;color:#55
 <h2>Ads</h2>
 <p>Promoted posts and promoted trends are hidden on X. The switch is in the extension popup: untick <b>Hide ads on X</b> to see them again. Grok answers are never hidden by it. Liking an ad still works and is still captured — it just arrives marked as an ad, never silently dropped.</p>
 
+<h2>Getting your inbox back on a new device</h2>
+<p>Optional, and worth two minutes: in the popup open <b>Advanced</b>, type your email, press <b>Email me a code</b>, and enter the 6 digits. That links this install to an account (no password, no form).</p>
+<p>Then pick a passphrase and press <b>Back up key</b>. What leaves your browser is your key wrapped with that passphrase: the inbox stores it, cannot open it, and can hand it back when you sign in somewhere else. On the new device: same email → code → <b>Restore key</b> with the passphrase. Your old captures open again.</p>
+<p class="mut">If you never back up the key, a lost recovery code means a lost inbox. That is the price of us not having a copy — and it is the right price.</p>
+
 <h2>Phones and automatic updates</h2>
 <p>The zip never updates itself: a folder has nowhere to look for a new version. If you want the <b>Update</b> button on your browser's extensions page to work, install the packaged build instead: <a href="/echolike-lite.crx">echolike-lite.crx</a>. It carries this page's address as its update source, so Update downloads and installs new versions for you.</p>
 <p class="mut">Quetta (Android): open the .crx with the browser and confirm. If it answers <code>CRX_REQUIRED_PROOF_MISSING</code>, that browser no longer accepts packages from outside its store: use the zip and repeat step 1 with each new zip.</p>
