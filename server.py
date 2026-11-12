@@ -7,6 +7,9 @@ Store: likes.jsonl (one JSON object per line) + .token (bearer token),
 
 Endpoints:
   GET  /api/health   -> {"ok": true, "claim": "private"|"open"}
+  GET  /api/likes    -> {"items": [...], "total": N}  Bearer token. The blobs, newest
+                        first, so the extension's inbox tab can read from this server
+                        exactly as it reads from the hosted one.
   POST /api/claim    -> {"token": "..."}  no token needed from a private network
                         (loopback, RFC1918, link-local, Tailscale 100.64/10);
                         the extension calls this itself, so the user pastes nothing
@@ -41,7 +44,7 @@ DEVICES_FILE = os.path.join(HERE, ".devices.json")  # sha256 of every claimed de
 LOG_FILE = os.path.join(HERE, "likes.jsonl")
 LOCK = threading.Lock()  # two simultaneous posts must not interleave lines
 
-MAX_DEVICES = int(os.environ.get("ECHO_MAX_DEVICES", "5"))
+MAX_DEVICES = int(os.environ.get("ECHO_MAX_DEVICES", "10"))  # a reinstall burns one; 5 was too tight
 CLAIM_PER_IP_HOUR = int(os.environ.get("ECHO_CLAIM_PER_HOUR", "5"))
 OPEN_CLAIM = False  # --open-claim: a public server that knowingly accepts claims
 CLAIMS = {}  # ip -> [unixtime, ...], in memory: a restart forgets, the device cap does not
@@ -194,7 +197,14 @@ class H(BaseHTTPRequestHandler):
         if why == "rate":
             return self._json({"ok": False, "error": "too many claims from this address"}, 429)
         if why == "cap":
-            return self._json({"ok": False, "error": "this inbox already has %d devices" % MAX_DEVICES}, 409)
+            return self._json(
+                {
+                    "ok": False,
+                    "error": "this inbox has reached its device limit (%d)" % MAX_DEVICES,
+                    "hint": "start it with --max-devices 50, or delete .devices.json to start over",
+                },
+                409,
+            )
         print("Claim from %s -> device token issued" % ip, flush=True)
         self._json({"ok": True, "token": tok, "server": "echolike-lite", "api": 2})
 
@@ -214,9 +224,32 @@ class H(BaseHTTPRequestHandler):
                     f.write(json.dumps(it) + "\n")
         self._json({"received": len(items)})
 
+    def _likes_list(self):
+        if not authorized(self.headers.get("authorization", "")):
+            return self._json({"ok": False, "error": "unauthorized"}, 401)
+        items = []
+        if os.path.exists(LOG_FILE):
+            with open(LOG_FILE) as f:
+                for ln in f:
+                    ln = ln.strip()
+                    if not ln:
+                        continue
+                    try:
+                        items.append(json.loads(ln))
+                    except ValueError:
+                        continue  # a half-written line never breaks the list
+        try:
+            limit = int(self.path.split("limit=")[1].split("&")[0])
+        except (IndexError, ValueError):
+            limit = 200
+        limit = max(1, min(500, limit))
+        self._json({"ok": True, "items": list(reversed(items))[:limit], "total": len(items), "api": 2})
+
     def do_GET(self):
         self._safe(
-            lambda: self._json(
+            lambda: self._likes_list()
+            if self.path.split("?")[0] == "/api/likes"
+            else self._json(
                 {"ok": True, "server": "echolike-lite", "api": 2, "claim": "open" if OPEN_CLAIM else "private"}
             )
             if self.path == "/api/health"
@@ -241,8 +274,10 @@ if __name__ == "__main__":
     ap.add_argument("--port", type=int, default=8931)
     ap.add_argument("--host", default="0.0.0.0")
     ap.add_argument("--open-claim", action="store_true", help="allow POST /api/claim from public addresses")
+    ap.add_argument("--max-devices", type=int, default=MAX_DEVICES, help="how many devices may claim (default 10)")
     args = ap.parse_args()
     OPEN_CLAIM = OPEN_CLAIM or args.open_claim
+    MAX_DEVICES = args.max_devices
     srv = ThreadingHTTPServer((args.host, args.port), H)
     srv.daemon_threads = True
     print("EchoLike Lite inbox on %s:%d" % (args.host, args.port), flush=True)
