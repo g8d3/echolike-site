@@ -10,9 +10,12 @@ Endpoints:
   POST /api/claim    -> {"token": "..."}  no token needed from a private network
                         (loopback, RFC1918, link-local, Tailscale 100.64/10);
                         the extension calls this itself, so the user pastes nothing
-  POST /api/likes    -> {"items": [...]} with  Authorization: Bearer <token>
+  POST /api/likes    -> {"items": [{uid,iv,ct}, ...]} with  Authorization: Bearer <token>
                         (server token or any claimed device token)
-                        returns {"received": N}
+                        The extension encrypts in the browser, so what arrives is a
+                        blob this server cannot read — by design. It stores it as
+                        one JSON line and returns {"received": N}
+  GET  /             -> how many captures, and where to read them decrypted
   GET  /             -> readable list of the last 100 captures
 
 A bad request can never take the server down: every handler is wrapped, and a
@@ -157,33 +160,21 @@ class H(BaseHTTPRequestHandler):
                 pass
 
     def _page(self):
-        rows = []
+        n = 0
         if os.path.exists(LOG_FILE):
             with open(LOG_FILE) as f:
-                lines = f.readlines()[-100:]
-            for ln in reversed(lines):
-                try:
-                    it = json.loads(ln)
-                except ValueError:
-                    continue
-                rows.append(
-                    "<li><b>%s</b> @%s — %s<br><small><a href=\"%s\">%s</a> · %s</small></li>"
-                    % (
-                        html.escape(str(it.get("kind", "?"))),
-                        html.escape(str(it.get("handle", "?"))),
-                        html.escape(str(it.get("text", ""))[:200]),
-                        html.escape(str(it.get("url", ""))),
-                        html.escape(str(it.get("url", ""))),
-                        html.escape(str(it.get("clicked_at", ""))),
-                    )
-                )
+                n = sum(1 for ln in f if ln.strip())
         body = (
             "<!doctype html><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'>"
             "<title>EchoLike Lite inbox</title>"
             "<style>body{font:15px system-ui;max-width:640px;margin:24px auto;padding:0 14px}"
-            "li{margin:10px 0}small{color:#555}a{color:#1d9bf0}</style>"
-            "<h1>EchoLike Lite inbox</h1><p>%d capture(s). Newest first.</p><ul>%s</ul>"
-            % (len(rows), "".join(rows) or "<li>Nothing yet. Like a post on X.</li>")
+            "small{color:#555}a{color:#1d9bf0}</style>"
+            "<h1>EchoLike Lite inbox</h1>"
+            "<p>%d capture(s) stored. They are encrypted: this server cannot read them, "
+            "which is the point.</p>"
+            "<p>Read them in the extension: open the popup and press <b>Open my inbox</b> "
+            "(it decrypts in your browser with the key that never leaves it).</p>"
+            "<p><small>Data: <code>likes.jsonl</code>, one opaque blob per line, next to this script.</small></p>" % n
         ).encode()
         self._send(body, "text/html; charset=utf-8")
 

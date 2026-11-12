@@ -39,8 +39,10 @@ footer{border-top:1px solid #e3e3e3;margin-top:2.5rem;padding-top:1rem;color:#55
 <pre>python3 server.py</pre>
 <p>Then press <b>Find my inbox</b> in the popup: it prefers a server on this computer over the hosted one. You own <code>likes.jsonl</code>, nothing leaves your network.</p>
 
-<h2>What we can see</h2>
-<p>The hosted inbox stores your captures in plain text, so whoever runs it can read them. That is the honest state of it today; client-side encryption and self-hosting are the fix, in that order. Your likes are always mirrored in your own browser, so you can export them without asking us.</p>
+<h2>What we can see: nothing</h2>
+<p>Every capture is encrypted in your browser before it is sent (AES-256-GCM), and the key never leaves the device. The inbox only stores sealed blobs: our server cannot read your likes, and neither could anyone who broke into it. A stolen inbox key buys ciphertext.</p>
+<p>That also means the key is yours to keep: the popup shows your <b>recovery code</b> under Advanced. Save it — it is the only way to read the inbox on another device, and no one can regenerate it for you.</p>
+<p>To read your inbox anywhere: <b>Open my inbox</b> in the popup, or open the inbox address with your token and key. Your likes are also mirrored in your own browser, so you can export them without asking us.</p>
 
 <h2>Ads</h2>
 <p>Promoted posts and promoted trends are hidden on X. The switch is in the extension popup: untick <b>Hide ads on X</b> to see them again. Grok answers are never hidden by it. Liking an ad still works and is still captured — it just arrives marked as an ad, never silently dropped.</p>
