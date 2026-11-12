@@ -37,6 +37,7 @@ import time
 import traceback
 from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from urllib.parse import parse_qs, urlparse
 
 HERE = os.getcwd()  # data lives in the folder you run it from, not next to the script
 TOKEN_FILE = os.path.join(HERE, ".token")
@@ -257,12 +258,29 @@ class H(BaseHTTPRequestHandler):
                         items.append(json.loads(ln))
                     except ValueError:
                         continue  # a half-written line never breaks the list
+        # One capture, one row: an older client's repair pass could append the same
+        # blob twice, and the duplicates buried the real list.
+        seen = set()
+        unique = []
+        for it in reversed(items):
+            u = it.get("uid") if isinstance(it, dict) else None
+            if u:
+                if u in seen:
+                    continue
+                seen.add(u)
+            unique.append(it)
+        qs = parse_qs(urlparse(self.path).query)
         try:
-            limit = int(self.path.split("limit=")[1].split("&")[0])
-        except (IndexError, ValueError):
+            limit = int(qs.get("limit", ["200"])[0])
+        except ValueError:
             limit = 200
+        try:
+            offset = int(qs.get("offset", ["0"])[0])
+        except ValueError:
+            offset = 0
         limit = max(1, min(500, limit))
-        self._json({"ok": True, "items": list(reversed(items))[:limit], "total": len(items), "api": 2})
+        offset = max(0, offset)
+        self._json({"ok": True, "items": unique[offset:offset + limit], "total": len(unique), "api": 2})
 
     def do_GET(self):
         self._safe(
