@@ -46,6 +46,7 @@ LOG_FILE = os.path.join(HERE, "likes.jsonl")
 # Diagnostics live next to the captures but in their own file: a self-hosted inbox is
 # still the best place for them (the owner asked), and never a capture.
 TEL_FILE = os.path.join(HERE, "telemetry.jsonl")
+ADR_FILE = os.path.join(HERE, "adreports.jsonl")
 LOCK = threading.Lock()  # two simultaneous posts must not interleave lines
 
 MAX_DEVICES = int(os.environ.get("ECHO_MAX_DEVICES", "10"))  # a reinstall burns one; 5 was too tight
@@ -334,6 +335,29 @@ class H(BaseHTTPRequestHandler):
                     f.write(json.dumps(r) + "\n")
         self._json({"ok": True, "stored": len(rows)})
 
+    def _adreport(self):
+        """POST /api/adreport — the rich half of an ad diagnostic, kept beside the
+        captures. The client decides how much it carries (shapes, labels, or markup);
+        this inbox only stores what arrives, capped, in its own file."""
+        try:
+            body = json.loads(self._read_body() or b"{}")
+        except (ValueError, OSError):
+            return self._json({"error": "bad json"}, 400)
+        if not isinstance(body, dict):
+            return self._json({"error": "bad report"}, 400)
+        row = {
+            "at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+            "version": str(body.get("version") or "")[:20],
+            "kind": str(body.get("kind") or "")[:20],
+            "post_url": str(body.get("post_url") or "")[:300] or None,
+            "detail": str(body.get("detail") or "")[:2000] or None,
+            "words": str(body.get("words") or "")[:1000] or None,
+            "html": str(body.get("html") or "")[:96000] or None,
+        }
+        with open(ADR_FILE, "a") as f:
+            f.write(json.dumps(row) + "\n")
+        self._json({"ok": True, "stored": 1})
+
     def do_OPTIONS(self):
         # CORS preflight: answer it instead of letting http.server reply 501.
         self._safe(lambda: self._send(b"", "text/plain", 204))
@@ -343,6 +367,8 @@ class H(BaseHTTPRequestHandler):
         self._safe(
             lambda: self._likes()
             if path == "/api/likes"
+            else self._adreport()
+            if path == "/api/adreport"
             else self._telemetry()
             if path == "/api/telemetry"
             else self._claim()
