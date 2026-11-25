@@ -43,6 +43,9 @@ HERE = os.getcwd()  # data lives in the folder you run it from, not next to the 
 TOKEN_FILE = os.path.join(HERE, ".token")
 DEVICES_FILE = os.path.join(HERE, ".devices.json")  # sha256 of every claimed device token
 LOG_FILE = os.path.join(HERE, "likes.jsonl")
+# Diagnostics live next to the captures but in their own file: a self-hosted inbox is
+# still the best place for them (the owner asked), and never a capture.
+TEL_FILE = os.path.join(HERE, "telemetry.jsonl")
 LOCK = threading.Lock()  # two simultaneous posts must not interleave lines
 
 MAX_DEVICES = int(os.environ.get("ECHO_MAX_DEVICES", "10"))  # a reinstall burns one; 5 was too tight
@@ -296,10 +299,40 @@ class H(BaseHTTPRequestHandler):
         )
 
     def _telemetry(self):
-        """POST /api/telemetry — accepted so the client's queue drains, not stored here.
-        A self-hosted inbox has nothing to report to; the hosted one keeps it."""
-        self._read_body()
-        self._json({"ok": True, "stored": 0})
+        """POST /api/telemetry — stored next to the captures, in telemetry.jsonl.
+
+        The client sends only whitelisted fields (action, ok, code, ms, host, error,
+        detail, version): no post text, no handle, no link. Keeping them here means a
+        self-hosted inbox answers "why did it fail?" as well as the hosted one, and
+        that the answer never leaves the machine."""
+        try:
+            events = json.loads(self._read_body() or b"{}").get("events", [])
+        except (ValueError, OSError):
+            return self._json({"error": "bad json"}, 400)
+        if not isinstance(events, list):
+            return self._json({"error": "events must be a list"}, 400)
+        rows = []
+        for e in events[:20]:
+            if not isinstance(e, dict) or not isinstance(e.get("action"), str):
+                continue
+            rows.append(
+                {
+                    "at": e.get("at") or datetime.now(timezone.utc).isoformat(timespec="seconds"),
+                    "version": str(e.get("version") or "")[:20],
+                    "action": e["action"][:40],
+                    "ok": e.get("ok") if isinstance(e.get("ok"), bool) else None,
+                    "code": e.get("code") if isinstance(e.get("code"), int) else None,
+                    "ms": e.get("ms") if isinstance(e.get("ms"), int) else None,
+                    "host": str(e.get("host") or "")[:60] or None,
+                    "error": str(e.get("error") or "")[:160] or None,
+                    "detail": str(e.get("detail") or "")[:1200] or None,
+                }
+            )
+        if rows:
+            with open(TEL_FILE, "a") as f:
+                for r in rows:
+                    f.write(json.dumps(r) + "\n")
+        self._json({"ok": True, "stored": len(rows)})
 
     def do_OPTIONS(self):
         # CORS preflight: answer it instead of letting http.server reply 501.
